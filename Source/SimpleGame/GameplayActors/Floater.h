@@ -38,6 +38,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Floater Variables");
 	bool bShouldFloat;
 
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Floater Variables");
+	FRotator initialRotation;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
