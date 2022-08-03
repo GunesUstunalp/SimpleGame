@@ -14,8 +14,12 @@ AFloater::AFloater()
 
 	initialLocation = FVector(0.0f, 0.0f, 0.0f);
 	placedLocation = FVector(0.0f, 0.0f, 0.0f);
+	worldOrigin = FVector(0.0f, 0.0f, 0.0f);
+
+	initialDirection = FVector(0.0f, 0.0f, 0.0f);
 
 	bInitializeFloaterLocations = false;
+	bShouldFloat = false;
 }
 
 // Called when the game starts or when spawned
@@ -35,5 +39,9 @@ void AFloater::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (bShouldFloat) {
+		FHitResult HitResult;
+		AddActorLocalOffset(initialDirection, false, &HitResult);
+	}
 }
 
