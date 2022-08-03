@@ -1,6 +1,4 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "Floater.h"
 
 // Sets default values
@@ -41,7 +39,11 @@ void AFloater::Tick(float DeltaTime)
 
 	if (bShouldFloat) {
 		FHitResult HitResult;
-		AddActorLocalOffset(initialDirection, false, &HitResult);
+		AddActorLocalOffset(initialDirection, true, &HitResult);
+
+		FVector HitLocation = HitResult.Location;
+
+		UE_LOG(LogTemp, Warning, TEXT("Hit Location: X = %f, Y = %f, Z = %f"), HitLocation.X, HitLocation.Y, HitLocation.Z);
 	}
 }
 
