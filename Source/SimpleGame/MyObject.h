@@ -7,14 +7,16 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class SIMPLEGAME_API UMyObject : public UObject
 {
 	GENERATED_BODY()
 public:
 	UMyObject();
 
+	UPROPERTY(BlueprintReadWrite, Category = "MyVariables")
 	float myFloat;
 
+	UFUNCTION(BlueprintCallable, Category = "MyFunctions")
 	void MyFunction();
 };
