@@ -14,6 +14,7 @@ class SIMPLEGAME_API AFloater : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AFloater();
+
 	
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere,  Category = "ActorMeshComponents");
 	UStaticMeshComponent* StaticMesh;
@@ -33,7 +34,7 @@ public:
 	FVector worldOrigin;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Floater Variables");
-	FVector initialDirection;
+	FVector initialForce;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Floater Variables");
 	bool bShouldFloat;
@@ -49,4 +50,18 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+private:
+	float runningTime;
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Floater Variables");
+	float Amplitude;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Floater Variables");
+	float Period;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Floater Variables");
+	float PhaseShift;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Floater Variables");
+	float VerticalShift;
 };

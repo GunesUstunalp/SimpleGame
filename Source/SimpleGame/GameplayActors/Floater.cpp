@@ -4,6 +4,7 @@
 // Sets default values
 AFloater::AFloater()
 {
+	runningTime = 0.f;
 	PrimaryActorTick.bCanEverTick = true;
 
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CustomStaticMesh"));
@@ -14,43 +15,49 @@ AFloater::AFloater()
 	placedLocation = FVector(0.0f, 0.0f, 0.0f);
 	worldOrigin = FVector(0.0f, 0.0f, 0.0f);
 
-	initialDirection = FVector(0.0f, 0.0f, 0.0f);
+	initialForce = FVector(0.0f, 0.0f, 0.0f);
 	initialRotation = FRotator(0.0f, 0.0f, 0.0f);
 
 	bInitializeFloaterLocations = false;
 	bShouldFloat = false;
+
+	//Amplitude, Period, PhaseShift, VerticalShift = 0.f;
 }
 
 // Called when the game starts or when spawned
 void AFloater::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	placedLocation = GetActorLocation();
+
+	initialLocation = FVector(FMath::FRandRange(-500.f,500.f), FMath::FRandRange(-500.f,500.f), FMath::FRandRange(20.f,500.f));
 
 	if (bInitializeFloaterLocations) {
 		SetActorLocation(initialLocation);
 	}
+	
+	/*if (bShouldFloat) {
+		StaticMesh->AddForce(initialForce);
+		StaticMesh->AddTorqueInRadians(initialForce);
+	}*/
 
-	FHitResult HitResult;
-	FVector LocalOffset = FVector(200.f, 0.0f, 0.0f);
-	AddActorLocalOffset(LocalOffset, true, &HitResult);
+	placedLocation = GetActorLocation();
+
 }
 
 // Called every frame
 void AFloater::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	runningTime += DeltaTime;
 
 	if (bShouldFloat) {
-		FHitResult HitResult;
-		AddActorLocalOffset(initialDirection, true, &HitResult);
+		FVector NewLocation = GetActorLocation();
 
-		FVector HitLocation = HitResult.Location;
+		NewLocation.Z = placedLocation.Z + Amplitude * FMath::Sin(Period * runningTime - PhaseShift) + VerticalShift;
 
-		UE_LOG(LogTemp, Warning, TEXT("Hit Location: X = %f, Y = %f, Z = %f"), HitLocation.X, HitLocation.Y, HitLocation.Z);
+		UE_LOG(LogTemp, Warning, TEXT("amp is %f"), Amplitude);
+
+		SetActorLocation(NewLocation);
 	}
-
-	AddActorWorldRotation(initialRotation);
 }
 
