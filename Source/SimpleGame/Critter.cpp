@@ -60,20 +60,9 @@ void ACritter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ACritter::MoveForward(float Value) {
 	CurrentVelocity.X = FMath::Clamp(Value, -1.f, 1.f) * MaxSpeed;
-
-	if (Value == 1) {
-		UE_LOG(LogTemp, Warning, TEXT("MovingForward"));
-	}	
-	else if(Value == -1)
-		UE_LOG(LogTemp, Warning, TEXT("MovingBackward"));
 }
 
 void ACritter::MoveRight(float Value) {
 	CurrentVelocity.Y = FMath::Clamp(Value, -1.f, 1.f) * MaxSpeed;
-	if (Value == 1) {
-		UE_LOG(LogTemp, Warning, TEXT("MovingRight"));
-	}		
-	else if (Value == -1)
-		UE_LOG(LogTemp, Warning, TEXT("MovingLeft"));
 }
 
