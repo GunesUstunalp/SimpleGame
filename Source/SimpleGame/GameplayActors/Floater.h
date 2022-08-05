@@ -52,12 +52,13 @@ public:
 
 private:
 	float runningTime;
+
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Floater Variables");
 	float Amplitude;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Floater Variables");
-	float Period;
+	float Frequency;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Floater Variables");
 	float PhaseShift;

@@ -53,7 +53,7 @@ void AFloater::Tick(float DeltaTime)
 	if (bShouldFloat) {
 		FVector NewLocation = GetActorLocation();
 
-		NewLocation.Z = placedLocation.Z + Amplitude * FMath::Sin(Period * runningTime - PhaseShift) + VerticalShift;
+		NewLocation.Z = placedLocation.Z + Amplitude * FMath::Sin(Frequency * runningTime - PhaseShift) + VerticalShift;
 
 		UE_LOG(LogTemp, Warning, TEXT("amp is %f"), Amplitude);
 
