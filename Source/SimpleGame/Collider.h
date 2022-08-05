@@ -38,6 +38,11 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Mesh")
 	class USpringArmComponent* SpringArm;
 
+	UPROPERTY(VisibleAnywhere, Category = "Movement")
+	class UColliderMovementComponent* OurMovementComponent;
+
+	virtual UPawnMovementComponent* GetMovementComponent() const override;
+
 	FORCEINLINE UStaticMeshComponent* GetMeshComponent() { return MeshComponent; }
 	FORCEINLINE void SetMeshComponent(UStaticMeshComponent* Mesh) { MeshComponent = Mesh; }
 	FORCEINLINE USphereComponent* GetSphereComponent() { return SphereComponent; }
