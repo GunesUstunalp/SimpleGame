@@ -15,7 +15,13 @@ void UColliderMovementComponent::TickComponent(float DeltaTime, enum ELevelTick 
 	if (!DesiredMovementThisFrame.IsNearlyZero()) {
 
 		FHitResult Hit;
-		SafeMoveUpdatedComponent(DesiredMovementThisFrame, UpdatedComponent->GetComponentRotation(), &Hit);
+		SafeMoveUpdatedComponent(DesiredMovementThisFrame, UpdatedComponent->GetComponentRotation(), true, Hit);
+
+		//if we bump into something, slide along the side of it
+		if (Hit.IsValidBlockingHit()) {
+			SlideAlongSurface(DesiredMovementThisFrame, 1.f - Hit.Time, Hit.Normal, Hit);
+			UE_LOG(LogTemp, Warning, TEXT("Valid Blocking Hit!"));
+		}
 	}
 
 
