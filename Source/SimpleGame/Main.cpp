@@ -4,6 +4,7 @@
 #include "Main.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Gameframework/Controller.h"
 
 // Sets default values
 AMain::AMain()
@@ -17,9 +18,16 @@ AMain::AMain()
 	CameraBoom->TargetArmLength = 600.f; // Camera follows at this distance
 	CameraBoom->bUsePawnControlRotation = true; // Rotate arm based on controller
 
+	//Create Follow Camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
-	//FollowCamera->SetupAttachment(Camera, )
+	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
+	//Attach the camera to the end of the boom and let the boom adjust to match
+	//the controller orientation
+	FollowCamera->bUsePawnControlRotation = false; 
 
+	//Set our turn rates for input
+	BaseTurnRate = 65.f;
+	BaseLookUpRate = 65.f;
 }
 
 // Called when the game starts or when spawned
@@ -40,6 +48,39 @@ void AMain::Tick(float DeltaTime)
 void AMain::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+}
+
+void AMain:: MoveForward(float Value) {
+	if (Controller != nullptr && Value != 0.0f) {
+
+		//Find out which way is forward
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
+
+		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		AddMovementInput(Direction, Value);
+	}
+
+}
+
+void AMain::MoveRight(float Value) {
+	if (Controller != nullptr && Value != 0.0f) {
+
+		//Find out which way is forward
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
+
+		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+		AddMovementInput(Direction, Value);
+	}
+}
+
+void AMain::TurnAtRate(float Rate) {
+	AddControllerYawInput(Rate);
+}
+
+void AMain::LookUpRate(float Rate) {
 
 }
 

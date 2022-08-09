@@ -107,7 +107,7 @@ void ACollider::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ACollider::MoveForward(float input) {
 	FVector Forward = GetActorForwardVector();
-	if (OurMovementComponent)
+	if (OurMovementComponent && input > 0)
 	{
 		OurMovementComponent->AddInputVector(Forward * input);
 	}
