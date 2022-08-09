@@ -61,13 +61,33 @@ void ACollider::Tick(float DeltaTime)
 
 	FRotator NewRotation = GetActorRotation();
 
-	NewRotation.Yaw += CameraInput.X;
-	NewRotation.Pitch += CameraInput.Y; //new
+	UE_LOG(LogTemp, Warning, TEXT("CameraInput.X is %f"), CameraInput.X);
+
+	NewRotation.Yaw += RotationInput.X + CameraInput.X;
+	NewRotation.Pitch += RotationInput.Y; //new
 	SetActorRotation(NewRotation);
 
-	/*FRotator NewSpringArmRotation = SpringArm->GetComponentRotation();
-	NewSpringArmRotation.Pitch = FMath::Clamp(NewSpringArmRotation.Pitch += CameraInput.Y, -80.f, 30.f);
-	SpringArm->SetWorldRotation(NewSpringArmRotation);*/
+	/*FRotator NewSpringArmRotation = SpringArm->GetComponentRotation();*/
+	//NewSpringArmRotation.Pitch = FMath::Clamp(NewSpringArmRotation.Pitch + CameraInput.Y, -80.f, 30.f);
+	/*NewSpringArmRotation.Yaw = FMath::Clamp(NewSpringArmRotation.Yaw + CameraInput.X, -45.f, 45.f);
+	if (CameraInput.X == 0) {
+		if (NewSpringArmRotation.Yaw > 1)
+			NewSpringArmRotation.Yaw -= DeltaTime * 30;
+		else if (NewSpringArmRotation.Yaw < -1)
+			NewSpringArmRotation.Yaw += DeltaTime * 30;
+		else
+			NewSpringArmRotation.Yaw = 0;
+	}
+
+	if (RotationInput.X != 0)
+		NewSpringArmRotation.Yaw = 0;*/
+
+	/*SpringArm->SetWorldRotation(NewSpringArmRotation);*/
+
+
+	
+
+	
 
 	
 
@@ -94,18 +114,22 @@ void ACollider::MoveForward(float input) {
 }
 	
 void ACollider::MoveRight(float input) {
+	RotationInput.X = input;
+	CameraInput.X = input;
+	//UE_LOG(LogTemp, Warning, TEXT("input is %f"), input);
 	FVector Right = GetActorRightVector();
 	if (OurMovementComponent)
 	{
-		OurMovementComponent->AddInputVector(Right * input);
+		OurMovementComponent->AddInputVector(Right * input * 0.2f);
 	}
 }
 
 void ACollider::PitchCamera(float AxisValue) {
-	CameraInput.Y = AxisValue;
+	RotationInput.Y = AxisValue;
 }
 
 void ACollider::YawCamera(float AxisValue) {
+	//UE_LOG(LogTemp, Warning, TEXT("AxisValue is %f"), AxisValue);
 	CameraInput.X = AxisValue;
 }
 

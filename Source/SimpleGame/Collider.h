@@ -61,4 +61,5 @@ private:
 	void YawCamera(float AxisValue);
 
 	FVector2D CameraInput;
+	FVector2D RotationInput;
 };
