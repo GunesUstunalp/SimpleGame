@@ -10,7 +10,10 @@ void UColliderMovementComponent::TickComponent(float DeltaTime, enum ELevelTick 
 		return;
 	}
 
-	FVector DesiredMovementThisFrame = ConsumeInputVector().GetClampedToMaxSize(1.0f);
+	FVector OldDesiredMovementThisFrame = ConsumeInputVector().GetClampedToMaxSize(1.0f);
+	
+	FVector DesiredMovementThisFrame = OldDesiredMovementThisFrame * DeltaTime * 3000.f;
+	//UE_LOG(LogTemp, Warning, TEXT("DeltaTime = %f, DesiredMovementThisFrame was %f, now is %f"), DeltaTime, OldDesiredMovementThisFrame.X, DesiredMovementThisFrame.X);
 
 	if (!DesiredMovementThisFrame.IsNearlyZero()) {
 

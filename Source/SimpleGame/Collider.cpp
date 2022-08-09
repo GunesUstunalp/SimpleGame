@@ -31,7 +31,7 @@ ACollider::ACollider()
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(GetRootComponent());
-	SpringArm->SetRelativeRotation(FRotator(-45.f, 0.f, 0.f));
+	SpringArm->SetRelativeRotation(FRotator(0.f, 0.f, 0.f)); //changed
 	SpringArm->TargetArmLength = 400.f;
 	SpringArm->bEnableCameraLag = true; //what does it do?
 	SpringArm->CameraLagSpeed = 3.0f; 
@@ -62,14 +62,14 @@ void ACollider::Tick(float DeltaTime)
 	FRotator NewRotation = GetActorRotation();
 
 	NewRotation.Yaw += CameraInput.X;
-
+	NewRotation.Pitch += CameraInput.Y; //new
 	SetActorRotation(NewRotation);
 
-	FRotator NewSpringArmRotation = SpringArm->GetComponentRotation();
+	/*FRotator NewSpringArmRotation = SpringArm->GetComponentRotation();
 	NewSpringArmRotation.Pitch = FMath::Clamp(NewSpringArmRotation.Pitch += CameraInput.Y, -80.f, 30.f);
+	SpringArm->SetWorldRotation(NewSpringArmRotation);*/
 
-	//if(NewSpringArmRotation.Pitch < 80 && NewSpringArmRotation.Pitch > -80)
-		SpringArm->SetWorldRotation(NewSpringArmRotation);
+	
 
 }
 
