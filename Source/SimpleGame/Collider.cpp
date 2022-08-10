@@ -175,7 +175,7 @@ void ACollider::MoveRight(float input) {
 }
 
 void ACollider::PitchCamera(float AxisValue) {
-	RotationInput.Y = AxisValue;
+	RotationInput.Y = -1.f * AxisValue;
 }
 
 void ACollider::YawCamera(float AxisValue) {
