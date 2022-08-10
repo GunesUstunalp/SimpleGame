@@ -5,7 +5,11 @@
     <projectFile>Intermediate/ProjectFiles/UE5.vcxproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="03c1079f-81da-4c3c-8740-e74a7c695206" name="Changes" comment="" />
+    <list default="true" id="03c1079f-81da-4c3c-8740-e74a7c695206" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SimpleGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SimpleGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor.modules" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor.modules" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SimpleGame/Main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SimpleGame/Main.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,9 +25,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -249,7 +255,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1660127210348</updated>
-      <workItem from="1660127223159" duration="353000" />
+      <workItem from="1660127223159" duration="737000" />
+      <workItem from="1660128172666" duration="1776000" />
+      <workItem from="1660131646596" duration="1926000" />
     </task>
     <servers />
   </component>
