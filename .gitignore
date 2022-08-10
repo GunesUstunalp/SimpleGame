@@ -76,5 +76,4 @@ Plugins/Developer/*/Binaries/*
 DerivedDataCache/*
 
 Windows/*
-Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor.modules
-Plugins/Developer/*
+Plugins/Developer/RiderLink/*

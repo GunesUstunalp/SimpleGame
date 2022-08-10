@@ -6,12 +6,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03c1079f-81da-4c3c-8740-e74a7c695206" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SimpleGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SimpleGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultInput.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultInput.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Character/Main_BP.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Character/Main_BP.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/MainLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/MainLevel.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor.modules" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor.modules" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SimpleGame/Collider.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SimpleGame/Collider.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/SimpleGame/Main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SimpleGame/Main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -263,6 +261,8 @@
       <workItem from="1660128172666" duration="1776000" />
       <workItem from="1660131646596" duration="3016000" />
       <workItem from="1660139641448" duration="719000" />
+      <workItem from="1660140647681" duration="1913000" />
+      <workItem from="1660143025143" duration="215000" />
     </task>
     <servers />
   </component>

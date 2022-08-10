@@ -5,6 +5,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Gameframework/Controller.h"
 
 // Sets default values
@@ -30,13 +31,21 @@ AMain::AMain()
 	BaseTurnRate = 65.f;
 	BaseLookUpRate = 65.f;
 
+	//Set size for collision capsule
+	GetCapsuleComponent()->SetCapsuleSize(40.f, 104.f);
+	
 	//Don't rotate when the controller rotates, let that just affect the camera
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
+
+	//Configure character movement
+	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input ...
+	GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.f, 0.0f); // ...at this rotation rate
+	GetCharacterMovement()->JumpZVelocity = 500.f;
+	GetCharacterMovement()->AirControl = 0.2f;
 	
-	//Set size for collision capsule
-	GetCapsuleComponent()->SetCapsuleSize(40.f, 104.f);
+	
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 }
 
