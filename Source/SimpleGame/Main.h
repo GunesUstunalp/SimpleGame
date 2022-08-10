@@ -54,5 +54,8 @@ public:
 	/* Called via input to look up/down at a given rate
 	* @param Rate: This is a normalized rate, i.e. 1.0 means 100% of desired look up/down rate
 	*/
-	void LookUpRate(float Rate);
+	void LookUpAtRate(float Rate);
+
+	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 };

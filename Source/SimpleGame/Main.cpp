@@ -77,10 +77,10 @@ void AMain::MoveRight(float Value) {
 }
 
 void AMain::TurnAtRate(float Rate) {
-	AddControllerYawInput(Rate);
+	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
 }
 
-void AMain::LookUpRate(float Rate) {
-
+void AMain::LookUpAtRate(float Rate) {
+	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
