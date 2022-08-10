@@ -69,8 +69,11 @@ Saved/*
 # Compiled source files for the engine to use
 Intermediate/*
 Plugins/*/Intermediate/*
+Plugins/Developer/*/Intermediate/*
+Plugins/Developer/*/Binaries/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
 
 Windows/*
+Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor.modules

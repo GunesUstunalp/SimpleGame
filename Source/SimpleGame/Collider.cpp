@@ -44,7 +44,7 @@ ACollider::ACollider()
 
 	CameraInput = FVector2D(0.f, 0.f);
 
-	AutoPossessPlayer = EAutoReceiveInput::Player0;
+	//AutoPossessPlayer = EAutoReceiveInput::Player0;
 }
 
 // Called when the game starts or when spawned
@@ -151,8 +151,8 @@ void ACollider::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ACollider::MoveForward);
 	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &ACollider::MoveRight);
 
-	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ACollider::PitchCamera);
-	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &ACollider::YawCamera);
+	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ACollider::YawCamera);
+	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &ACollider::PitchCamera);
 }
 
 void ACollider::MoveForward(float input) {
