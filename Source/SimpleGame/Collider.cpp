@@ -61,11 +61,61 @@ void ACollider::Tick(float DeltaTime)
 
 	FRotator NewRotation = GetActorRotation();
 
-	UE_LOG(LogTemp, Warning, TEXT("CameraInput.X is %f"), CameraInput.X);
+	//UE_LOG(LogTemp, Warning, TEXT("CameraInput.X is %f"), CameraInput.X);
 
 	NewRotation.Yaw += RotationInput.X + CameraInput.X;
 	NewRotation.Pitch += RotationInput.Y; //new
+
+
+	///***Option 1
+	//NewRotation.Roll += RotationInput.X;
+
+	///***Option 2
+	/*if (RotationInput.X != 0)
+		NewRotation.Roll += RotationInput.X;
+	else {
+		if (NewRotation.Roll < 1 && NewRotation.Roll > -1)
+			NewRotation.Roll = 0;
+		else if (NewRotation.Roll > 0)
+			NewRotation.Roll -= DeltaTime * 60;
+		else if (NewRotation.Roll < 0)
+			NewRotation.Roll += DeltaTime * 60;
+	}*/
+
+	///***Option 3
+	FRotator NewMeshRotation = MeshComponent->GetRelativeRotation();
+	NewMeshRotation.Pitch = FMath::Fmod(NewMeshRotation.Pitch + 360.0f, 360.0f);
+	//UE_LOG(LogTemp, Warning, TEXT("NewMeshRotation = %f, %f, %f"), NewMeshRotation.Pitch, NewMeshRotation.Yaw, NewMeshRotation.Roll);
+
+	if (RotationInput.X + CameraInput.X != 0) {
+		if(NewMeshRotation.Pitch < 88.f || NewMeshRotation.Pitch > 272.f)
+			NewMeshRotation.Pitch += (RotationInput.X + CameraInput.X) * 2;
+		else {
+			if (NewMeshRotation.Pitch < 180.f)
+				NewMeshRotation.Pitch = 89.f;
+			else
+				NewMeshRotation.Pitch = 271.f;
+		}
+	}
+	else {
+		if (NewMeshRotation.Pitch < 2.f || NewMeshRotation.Pitch > 358.f)
+			NewMeshRotation.Pitch = 0.f;
+		else if (NewMeshRotation.Pitch < 180.f)
+			NewMeshRotation.Pitch -= DeltaTime * 120;
+		else
+			NewMeshRotation.Pitch += DeltaTime * 120;
+	}
+	
+	UE_LOG(LogTemp, Warning, TEXT("NewMeshRotation.Pitch = %f   and RotationInput.X = %f"), NewMeshRotation.Pitch, RotationInput.X);
+
+	MeshComponent->SetRelativeRotation(FRotator(NewMeshRotation.Pitch, 270.f, 0.f) );
+	NewRotation.Roll = 0;
+	//End of Option 3
+
 	SetActorRotation(NewRotation);
+
+
+
 
 	/*FRotator NewSpringArmRotation = SpringArm->GetComponentRotation();*/
 	//NewSpringArmRotation.Pitch = FMath::Clamp(NewSpringArmRotation.Pitch + CameraInput.Y, -80.f, 30.f);
