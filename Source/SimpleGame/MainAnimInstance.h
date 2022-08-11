@@ -13,8 +13,18 @@ UCLASS()
 class SIMPLEGAME_API UMainAnimInstance : public UAnimInstance
 {
 	GENERATED_BODY()
+public:
+    virtual void NativeInitializeAnimation() override;
 
-	//UPROPERTY(EditAnywhere, BlueprintReadOnly, Category )
+	UFUNCTION(BlueprintCallable, Category= "AnimationProperties")
+	void UpdateAnimationProperties();
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
 	float MovementSpeed;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
+	bool bIsInAir;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
+	class APawn* Pawn;
 };
