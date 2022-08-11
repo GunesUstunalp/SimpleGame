@@ -134,9 +134,9 @@ void ACollider::Tick(float DeltaTime)
 
 	/*SpringArm->SetWorldRotation(NewSpringArmRotation);*/
 
-
-	
-
+	//Added a small constant forward movement to the spaceship - may remove later
+	FVector Forward = GetActorForwardVector();
+	OurMovementComponent->AddInputVector(Forward * 0.1f);
 	
 
 	

@@ -25,7 +25,7 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	
 	UPROPERTY(VisibleAnywhere, Category = "Mesh")
 	class UStaticMeshComponent* MeshComponent;
 
@@ -40,7 +40,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = "Movement")
 	class UColliderMovementComponent* OurMovementComponent;
-
+	
 	virtual UPawnMovementComponent* GetMovementComponent() const override;
 
 	FORCEINLINE UStaticMeshComponent* GetMeshComponent() { return MeshComponent; }
