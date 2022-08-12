@@ -13,5 +13,7 @@ UCLASS()
 class SIMPLEGAME_API USettingsMenuWidget : public UUserWidget
 {
 	GENERATED_BODY()
-	
+
+	UFUNCTION(BlueprintCallable)
+	void SetResolution(FString Resolution);
 };
