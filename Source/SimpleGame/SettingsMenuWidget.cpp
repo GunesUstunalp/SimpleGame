@@ -6,6 +6,14 @@
 #include "GameFramework/GameUserSettings.h"
 #include "Kismet/KismetStringLibrary.h"
 
+USettingsMenuWidget::USettingsMenuWidget(const FObjectInitializer& ObjectInitializer):Super(ObjectInitializer)
+{
+	AudioOptionPanel =CreateDefaultSubobject<UCanvasPanel>(TEXT("AudioOptionPanel"));
+	GraphicsOptionPanel =CreateDefaultSubobject<UCanvasPanel>("GraphicsOptionPanel");
+	GameplayOptionPanel =CreateDefaultSubobject<UCanvasPanel>("GameplayOptionPanel");
+	ControlsOptionPanel =CreateDefaultSubobject<UCanvasPanel>("ControlsOptionPanel");
+}
+
 void USettingsMenuWidget::SetResolution(FString Resolution)
 {
 	FString LeftS, RightS;
