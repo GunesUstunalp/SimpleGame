@@ -2,15 +2,15 @@
 
 
 #include "SettingsMenuWidget.h"
-
 #include "Components/Button.h"
-#include "Components/TextBlock.h"
 #include "GameFramework/GameUserSettings.h"
 #include "Kismet/KismetStringLibrary.h"
 
 void USettingsMenuWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
+	Settings = GEngine->GetGameUserSettings();
+	
 	AudioOptionPanel->SetVisibility(ESlateVisibility::Visible); // Show the audio panel by default
 	GraphicsOptionPanel->SetVisibility(ESlateVisibility::Hidden);
 	GameplayOptionPanel->SetVisibility(ESlateVisibility::Hidden);
@@ -30,36 +30,65 @@ void USettingsMenuWidget::NativeConstruct()
 	GameplayOptionButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::OnGameplayOptionButtonClicked);
 	ControlsOptionButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::OnControlsOptionButtonClicked);
 
-	WindowModeComboBox
+	ResolutionComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::SetResolution);
+	WindowModeComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::SetWindowMode);
+	QualityPresetComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::SetQualityPreset);
+	
 }
 
-void USettingsMenuWidget::SetResolution(FString Resolution) //TODO: TIDY-UP
+void USettingsMenuWidget::SetResolution(FString Resolution, ESelectInfo::Type SelectionType) //TODO: TIDY-UP
 {
 	FString LeftS, RightS;
 	Resolution.Split("x", &LeftS, &RightS);
 	UE_LOG(LogTemp,Warning, TEXT("Tried : %s %s"), *LeftS, *RightS);
-	GEngine->GameUserSettings->SetScreenResolution(FIntPoint(UKismetStringLibrary::Conv_StringToInt(LeftS), UKismetStringLibrary::Conv_StringToInt(RightS)));
-	GEngine->GameUserSettings->ApplyResolutionSettings(false);
+
+	Settings->SetScreenResolution(FIntPoint(UKismetStringLibrary::Conv_StringToInt(LeftS), UKismetStringLibrary::Conv_StringToInt(RightS)));
+	Settings->ApplySettings(false);
+	//GEngine->GameUserSettings->SetScreenResolution(FIntPoint(UKismetStringLibrary::Conv_StringToInt(LeftS), UKismetStringLibrary::Conv_StringToInt(RightS)));
+	//GEngine->GameUserSettings->ApplyResolutionSettings(false);
+	//GEngine->GameUserSettings->ApplySettings(false);
 	UE_LOG(LogTemp, Warning, TEXT("Set : %i, %i"), GEngine->GameUserSettings->GetScreenResolution().X, GEngine->GameUserSettings->GetScreenResolution().Y);
 }
 
-void USettingsMenuWidget::SetWindowMode(FString WindowMode)
+void USettingsMenuWidget::SetWindowMode(FString WindowMode, ESelectInfo::Type SelectionType)
 {
 	if(WindowMode.Equals("Fullscreen"))
-		GEngine->GameUserSettings->SetFullscreenMode(EWindowMode::Fullscreen);
+		Settings->SetFullscreenMode(EWindowMode::Fullscreen);
 	else if(WindowMode.Equals("Windowed"))
-		GEngine->GameUserSettings->SetFullscreenMode(EWindowMode::Windowed);
+		Settings->SetFullscreenMode(EWindowMode::Windowed);
 	else if(WindowMode.Equals("Borderless"))
-		GEngine->GameUserSettings->SetFullscreenMode(EWindowMode::WindowedFullscreen);
+		Settings->SetFullscreenMode(EWindowMode::WindowedFullscreen);
 	else
 	{
 		UE_LOG(LogTemp, Error, TEXT("ERROR! Unknown WindowMode!!!"));
 	}
+
+	Settings->ApplySettings(false);
 }
+
+void USettingsMenuWidget::SetQualityPreset(FString QualityPreset, ESelectInfo::Type SelectionType)
+{
+	if(QualityPreset.Equals("Very Low"))
+		Settings->ScalabilityQuality.SetFromSingleQualityLevel(0);
+	else if(QualityPreset.Equals("Low"))
+		Settings->ScalabilityQuality.SetFromSingleQualityLevel(1);
+	else if(QualityPreset.Equals("Medium"))
+		Settings->ScalabilityQuality.SetFromSingleQualityLevel(2);
+	else if(QualityPreset.Equals("High"))
+		Settings->ScalabilityQuality.SetFromSingleQualityLevel(3);
+	else if(QualityPreset.Equals("Very High"))
+		Settings->ScalabilityQuality.SetFromSingleQualityLevel(4);
+	else
+		UE_LOG(LogTemp, Error, TEXT("ERROR! Unknown QualityPreset!!!"));
+	
+	Settings->ApplySettings(false);
+}
+
 
 
 void USettingsMenuWidget::OnAudioOptionButtonClicked()
 {
+	
 	AudioOptionPanel->SetVisibility(ESlateVisibility::Visible);
 	GraphicsOptionPanel->SetVisibility(ESlateVisibility::Hidden);
 	GameplayOptionPanel->SetVisibility(ESlateVisibility::Hidden);

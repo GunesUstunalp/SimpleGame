@@ -6,7 +6,10 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
 #include "Components/CanvasPanel.h"
+#include "Components/CheckBox.h"
 #include "Components/ComboBox.h"
+#include "Components/ComboBoxString.h"
+#include "Components/Slider.h"
 #include "SettingsMenuWidget.generated.h"
 
 /**
@@ -17,7 +20,9 @@ class SIMPLEGAME_API USettingsMenuWidget : public UUserWidget
 {
 	GENERATED_BODY()
 public:
+	UFUNCTION()
 	void NativeConstruct() override; //constructor for the class
+	UGameUserSettings* Settings; //pointer to the game user settings
 	
 	UPROPERTY(BlueprintReadWrite, Category= Panels, meta=(BindWidget))
     UCanvasPanel* AudioOptionPanel;
@@ -49,28 +54,40 @@ public:
 
 	//Logic for the GraphicsOptionPanel
 	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
-	UComboBox* WindowModeComboBox;
+	UComboBoxString* WindowModeComboBox;
 
 	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
-	UComboBox* ResolutionComboBox;
+	UComboBoxString* ResolutionComboBox;
 
 	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
-	UComboBox* QualityPresetComboBox;
+	UComboBoxString* QualityPresetComboBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UButton* AdvancedSettingsButton;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UCheckBox* VSyncCheckBox;
+	
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	USlider* BrightnessSlider;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	USlider* GammaSlider;
 	
 	UFUNCTION(BlueprintCallable)
-	void SetResolution(FString Resolution);
+	void SetResolution(FString Resolution, ESelectInfo::Type SelectionType); //if it gives an error, make sure to enable "Slate" and "SlateCore" in the build.cs file
 
 	UFUNCTION(BlueprintCallable)
-	void SetWindowMode(FString WindowMode);
+	void SetWindowMode(FString WindowMode, ESelectInfo::Type SelectionType);
 
 	UFUNCTION(BlueprintCallable)
-	void SetQualityPreset(FString QualityPreset);
+	void SetQualityPreset(FString QualityPreset, ESelectInfo::Type SelectionType);
 
-	UFUNCTION(BlueprintCallable)
-	void SetBrightness(FString Brightness);
-
-	UFUNCTION(BlueprintCallable)
-	void SetGamma(FString Gamma);
+	// UFUNCTION(BlueprintCallable)
+	// void SetBrightness(FString Brightness);
+	//
+	// UFUNCTION(BlueprintCallable)
+	// void SetGamma(FString Gamma);
 
 	//Logic for the AudioOptionPanel
 	//TODO
