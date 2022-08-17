@@ -73,6 +73,12 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
 	USlider* GammaSlider;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UButton* ApplyButton;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UButton* ResetButton;
 	
 	UFUNCTION(BlueprintCallable)
 	void SetResolution(FString Resolution, ESelectInfo::Type SelectionType); //if it gives an error, make sure to enable "Slate" and "SlateCore" in the build.cs file
@@ -83,12 +89,21 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetQualityPreset(FString QualityPreset, ESelectInfo::Type SelectionType);
 
-	// UFUNCTION(BlueprintCallable)
-	// void SetBrightness(FString Brightness);
-	//
-	// UFUNCTION(BlueprintCallable)
-	// void SetGamma(FString Gamma);
+	UFUNCTION(BlueprintCallable)
+	void SetVSync(bool VSync);
 
+	UFUNCTION(BlueprintCallable)
+	void SetBrightness(float Brightness);
+
+	UFUNCTION(BlueprintCallable)
+	void SetGamma(float Gamma);
+
+	UFUNCTION(BlueprintCallable)
+	void ApplySettings();
+
+	UFUNCTION(BlueprintCallable)
+	void ResetSettings();
+	
 	//Logic for the AudioOptionPanel
 	//TODO
 
@@ -97,4 +112,7 @@ public:
 
 	//Logic for the ControlsOptionPanel
 	//TODO
+private:
+	void SetCurrentOptionsToAllFields(); //To be used when the menu first opens
+	void SetActionFunctionsForInputs(); //To be used in the constructor
 };
