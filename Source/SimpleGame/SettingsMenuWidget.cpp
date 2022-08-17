@@ -52,35 +52,53 @@ void USettingsMenuWidget::SetResolution(FString Resolution, ESelectInfo::Type Se
 
 void USettingsMenuWidget::SetWindowMode(FString WindowMode, ESelectInfo::Type SelectionType)
 {
-	if(WindowMode.Equals("Fullscreen"))
-		Settings->SetFullscreenMode(EWindowMode::Fullscreen);
-	else if(WindowMode.Equals("Windowed"))
-		Settings->SetFullscreenMode(EWindowMode::Windowed);
-	else if(WindowMode.Equals("Borderless"))
-		Settings->SetFullscreenMode(EWindowMode::WindowedFullscreen);
-	else
+	// if(WindowMode == "Fullscreen")
+	// 	Settings->SetFullscreenMode(EWindowMode::Fullscreen);
+	// else if(WindowMode.Equals("Windowed"))
+	// 	Settings->SetFullscreenMode(EWindowMode::Windowed);
+	// else if(WindowMode.Equals("Borderless"))
+	// 	Settings->SetFullscreenMode(EWindowMode::WindowedFullscreen);
+	// else
+	// {
+	// 	UE_LOG(LogTemp, Error, TEXT("ERROR! Unknown WindowMode!!!"));
+	// }
+
+	int selected = WindowModeComboBox->GetSelectedIndex(); //Instead of using the above code, we can use the selected index of the combo box to set the window mode to make the selection name agnostic i.e. "Borderless" is the same as "WindowedFullscreen"
+	switch (selected)
 	{
+	case 0:
+		Settings->SetFullscreenMode(EWindowMode::Fullscreen);
+		break;
+	case 1:
+		Settings->SetFullscreenMode(EWindowMode::WindowedFullscreen);
+		break;
+	case 2:
+		Settings->SetFullscreenMode(EWindowMode::Windowed);
+		break;
+	default:
 		UE_LOG(LogTemp, Error, TEXT("ERROR! Unknown WindowMode!!!"));
 	}
-
+	
 	Settings->ApplySettings(false);
 }
 
 void USettingsMenuWidget::SetQualityPreset(FString QualityPreset, ESelectInfo::Type SelectionType)
 {
-	if(QualityPreset.Equals("Very Low"))
-		Settings->ScalabilityQuality.SetFromSingleQualityLevel(0);
-	else if(QualityPreset.Equals("Low"))
-		Settings->ScalabilityQuality.SetFromSingleQualityLevel(1);
-	else if(QualityPreset.Equals("Medium"))
-		Settings->ScalabilityQuality.SetFromSingleQualityLevel(2);
-	else if(QualityPreset.Equals("High"))
-		Settings->ScalabilityQuality.SetFromSingleQualityLevel(3);
-	else if(QualityPreset.Equals("Very High"))
-		Settings->ScalabilityQuality.SetFromSingleQualityLevel(4);
-	else
-		UE_LOG(LogTemp, Error, TEXT("ERROR! Unknown QualityPreset!!!"));
-	
+	// if(QualityPreset.Equals("Very Low"))
+	// 	Settings->ScalabilityQuality.SetFromSingleQualityLevel(0);
+	// else if(QualityPreset.Equals("Low"))
+	// 	Settings->ScalabilityQuality.SetFromSingleQualityLevel(1);
+	// else if(QualityPreset.Equals("Medium"))
+	// 	Settings->ScalabilityQuality.SetFromSingleQualityLevel(2);
+	// else if(QualityPreset.Equals("High"))
+	// 	Settings->ScalabilityQuality.SetFromSingleQualityLevel(3);
+	// else if(QualityPreset.Equals("Very High"))
+	// 	Settings->ScalabilityQuality.SetFromSingleQualityLevel(4);
+	// else
+	// 	UE_LOG(LogTemp, Error, TEXT("ERROR! Unknown QualityPreset!!!"));
+
+	int selected = QualityPresetComboBox->GetSelectedIndex(); //Instead of using the above code, we can use the selected index of the combo box to set the quality preset to make the selection name agnostic i.e. "Cinematic" is the same as "Very High"
+	Settings->ScalabilityQuality.SetFromSingleQualityLevel(4 - selected); //The quality preset is set from the highest quality to the lowest quality, so we have to reverse the index
 	Settings->ApplySettings(false);
 }
 
