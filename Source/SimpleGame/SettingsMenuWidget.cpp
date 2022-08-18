@@ -2,7 +2,6 @@
 
 
 #include "SettingsMenuWidget.h"
-
 #include "Components/Button.h"
 #include "GameFramework/GameUserSettings.h"
 #include "Kismet/GameplayStatics.h"
@@ -38,27 +37,27 @@ void USettingsMenuWidget::SetCurrentOptionsToAllFields()
 		VSyncCheckBox->SetCheckedState(ECheckBoxState::Checked);
 	else
 		VSyncCheckBox->SetCheckedState(ECheckBoxState::Unchecked);
+	
+	//PostProcessing
 }
 
 void USettingsMenuWidget::SetActionFunctionsForInputs()
 {
 	AudioOptionButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::OnAudioOptionButtonClicked);
-	GraphicsOptionButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::OnGraphicsOptionButtonClicked);
+	DisplayOptionButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::OnDisplayOptionButtonClicked);
 	GameplayOptionButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::OnGameplayOptionButtonClicked);
 	ControlsOptionButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::OnControlsOptionButtonClicked);
-
+	GraphicsOptionButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::OnGraphicsOptionButtonClicked);
+	
 	ResolutionComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::SetResolution);
 	WindowModeComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::SetWindowMode);
 	QualityPresetComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::SetQualityPreset);
 	VSyncCheckBox->OnCheckStateChanged.AddDynamic(this, &USettingsMenuWidget::SetVSync);
 	BrightnessSlider->OnValueChanged.AddDynamic(this, &USettingsMenuWidget::SetBrightness);
 	GammaSlider->OnValueChanged.AddDynamic(this, &USettingsMenuWidget::SetGamma);
-
 	
 	ApplyButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::ApplySettings);
 	ResetButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::ResetSettings);
-
-	
 }
 
 void USettingsMenuWidget::NativeConstruct()
@@ -71,15 +70,6 @@ void USettingsMenuWidget::NativeConstruct()
 	SetCurrentOptionsToAllFields();
 
 	SetActionFunctionsForInputs();
-	
-	//At the editor the Render Transforms of the option menu panels are set different from each other to easily edit them. If not they would overlap on each other
-	//But we have to set the Render Transforms of the panels to the default value before executing the code
-	//This is the reason the code piece below exists, to reset the Render Transforms of those panels
-	const FWidgetTransform PanelTransform(FVector2D(0.f,0.f),FVector2D(1.f,1.f),FVector2D(0.f,0.f),0.f); //Default transform
-	AudioOptionPanel->SetRenderTransform(PanelTransform);
-	GraphicsOptionPanel->SetRenderTransform(PanelTransform);
-	GameplayOptionPanel->SetRenderTransform(PanelTransform);
-	ControlsOptionPanel->SetRenderTransform(PanelTransform);
 }
 
 void USettingsMenuWidget::SetResolution(FString Resolution, ESelectInfo::Type SelectionType)
@@ -119,7 +109,7 @@ void USettingsMenuWidget::SetWindowMode(FString WindowMode, ESelectInfo::Type Se
 		UE_LOG(LogTemp, Error, TEXT("ERROR! Unknown WindowMode!!!"));
 	}
 	
-	Settings->ApplySettings(false);
+	//Settings->ApplySettings(false);
 }
 
 void USettingsMenuWidget::SetQualityPreset(FString QualityPreset, ESelectInfo::Type SelectionType)
@@ -140,22 +130,27 @@ void USettingsMenuWidget::SetQualityPreset(FString QualityPreset, ESelectInfo::T
 	int selected = QualityPresetComboBox->GetSelectedIndex(); //Instead of using the above code, we can use the selected index of the combo box to set the quality preset to make the selection name agnostic i.e. "Cinematic" is the same as "Very High"
 	if(selected != 5) //If the selected index is not the custom quality level
 		Settings->ScalabilityQuality.SetFromSingleQualityLevel(4 - selected); //The quality preset is set from the highest quality to the lowest quality, so we have to reverse the index
-	Settings->ApplySettings(false);
+	//Settings->ApplySettings(false);
 }
 
 void USettingsMenuWidget::SetVSync(bool VSync)
 {
 	Settings->SetVSyncEnabled(VSync);
+
+	//TODO: Wait for ApplySettings() to set the VSyncEnabled value to true
 }
 
 void USettingsMenuWidget::SetBrightness(float Brightness)
 {
-	UGameplayStatics::GetActorOfClass(PostProcessVolu, this)->SetFloatParameterValue("Brightness", Brightness);
+	//UGameplayStatics::GetActorOfClass(PostProcessVolume, this)->SetFloatParameterValue("Brightness", Brightness);
 }
 
 void USettingsMenuWidget::SetGamma(float Gamma)
 {
-	Settings->SetGamma(Gamma);
+	float LerpedValue = FMath::Lerp(0.f, 4.4f, Gamma);
+	GetOwningPlayer()->ConsoleCommand("gamma " + FString::SanitizeFloat(LerpedValue));
+	//TODO:Do not apply immediately, wait for ApplySettings() to set the Gamma value to the correct value
+	//Settings->SetGamma(Gamma);
 }
 
 
@@ -166,7 +161,12 @@ void USettingsMenuWidget::ApplySettings()
 
 void USettingsMenuWidget::ResetSettings()
 {
+	//Gamma
+	GammaSlider->SetValue(0.5f);
+	GetOwningPlayer()->ConsoleCommand("gamma " + FString::SanitizeFloat(2.2f));
 	//TODO: Reset the settings to the default values
+
+	
 }
 
 
@@ -174,33 +174,55 @@ void USettingsMenuWidget::ResetSettings()
 
 void USettingsMenuWidget::OnAudioOptionButtonClicked()
 {
+	AudioOptionButton->SetIsEnabled(false);
+	DisplayOptionButton->SetIsEnabled(true);
+	GameplayOptionButton->SetIsEnabled(true);
+	ControlsOptionButton->SetIsEnabled(true);
+	GraphicsOptionButton->SetIsEnabled(true);
 	
-	AudioOptionPanel->SetVisibility(ESlateVisibility::Visible);
-	GraphicsOptionPanel->SetVisibility(ESlateVisibility::Hidden);
-	GameplayOptionPanel->SetVisibility(ESlateVisibility::Hidden);
-	ControlsOptionPanel->SetVisibility(ESlateVisibility::Hidden);
+	OptionSwitcher->SetActiveWidgetIndex(0);
 }
 
-void USettingsMenuWidget::OnGraphicsOptionButtonClicked()
+void USettingsMenuWidget::OnDisplayOptionButtonClicked()
 {
-	AudioOptionPanel->SetVisibility(ESlateVisibility::Hidden);
-	GraphicsOptionPanel->SetVisibility(ESlateVisibility::Visible);
-	GameplayOptionPanel->SetVisibility(ESlateVisibility::Hidden);
-	ControlsOptionPanel->SetVisibility(ESlateVisibility::Hidden);
+	DisplayOptionButton->SetIsEnabled(false);
+	AudioOptionButton->SetIsEnabled(true);
+	GameplayOptionButton->SetIsEnabled(true);
+	ControlsOptionButton->SetIsEnabled(true);
+	GraphicsOptionButton->SetIsEnabled(true);
+	
+	OptionSwitcher->SetActiveWidgetIndex(1);
 }
 
 void USettingsMenuWidget::OnGameplayOptionButtonClicked()
 {
-	AudioOptionPanel->SetVisibility(ESlateVisibility::Hidden);
-	GraphicsOptionPanel->SetVisibility(ESlateVisibility::Hidden);
-	GameplayOptionPanel->SetVisibility(ESlateVisibility::Visible);
-	ControlsOptionPanel->SetVisibility(ESlateVisibility::Hidden);
+	GameplayOptionButton->SetIsEnabled(false);
+	AudioOptionButton->SetIsEnabled(true);
+	DisplayOptionButton->SetIsEnabled(true);
+	ControlsOptionButton->SetIsEnabled(true);
+	GraphicsOptionButton->SetIsEnabled(true);
+	
+	OptionSwitcher->SetActiveWidgetIndex(2);
 }
 
 void USettingsMenuWidget::OnControlsOptionButtonClicked()
 {
-	AudioOptionPanel->SetVisibility(ESlateVisibility::Hidden);
-	GraphicsOptionPanel->SetVisibility(ESlateVisibility::Hidden);
-	GameplayOptionPanel->SetVisibility(ESlateVisibility::Hidden);
-	ControlsOptionPanel->SetVisibility(ESlateVisibility::Visible);
+	ControlsOptionButton->SetIsEnabled(false);
+	AudioOptionButton->SetIsEnabled(true);
+	DisplayOptionButton->SetIsEnabled(true);
+	GameplayOptionButton->SetIsEnabled(true);
+	GraphicsOptionButton->SetIsEnabled(true);
+	
+	OptionSwitcher->SetActiveWidgetIndex(3);
+}
+
+void USettingsMenuWidget::OnGraphicsOptionButtonClicked()
+{
+	GraphicsOptionButton->SetIsEnabled(false);
+	ControlsOptionButton->SetIsEnabled(true);
+	AudioOptionButton->SetIsEnabled(true);
+	DisplayOptionButton->SetIsEnabled(true);
+	GameplayOptionButton->SetIsEnabled(true);
+	
+	OptionSwitcher->SetActiveWidgetIndex(4);
 }

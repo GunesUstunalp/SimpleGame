@@ -10,6 +10,7 @@
 #include "Components/ComboBox.h"
 #include "Components/ComboBoxString.h"
 #include "Components/Slider.h"
+#include "Components/WidgetSwitcher.h"
 #include "SettingsMenuWidget.generated.h"
 
 /**
@@ -27,57 +28,63 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category= Panels, meta=(BindWidget))
     UCanvasPanel* AudioOptionPanel;
 	UPROPERTY(BlueprintReadWrite, Category= Panels, meta=(BindWidget))
-    UCanvasPanel* GraphicsOptionPanel;
+    UCanvasPanel* DisplayOptionPanel;
 	UPROPERTY(BlueprintReadWrite, Category= Panels, meta=(BindWidget))
     UCanvasPanel* GameplayOptionPanel;
 	UPROPERTY(BlueprintReadWrite, Category= Panels, meta=(BindWidget))
     UCanvasPanel* ControlsOptionPanel;
+	UPROPERTY(BlueprintReadWrite, Category= Panels, meta=(BindWidget))
+	UCanvasPanel* GraphicsOptionPanel;
 
+	UPROPERTY(BlueprintReadWrite, Category = Panels, meta = (BindWidget))
+	UWidgetSwitcher* OptionSwitcher;
+	
 	//Menu Selection Buttons on the left side of the screen
 	UPROPERTY(BlueprintReadWrite, Category= Buttons, meta=(BindWidget))
 	UButton* AudioOptionButton;
 	UPROPERTY(BlueprintReadWrite, Category= Buttons, meta=(BindWidget))
-	UButton* GraphicsOptionButton;
+	UButton* DisplayOptionButton;
 	UPROPERTY(BlueprintReadWrite, Category= Buttons, meta=(BindWidget))
 	UButton* GameplayOptionButton;
 	UPROPERTY(BlueprintReadWrite, Category= Buttons, meta=(BindWidget))
 	UButton* ControlsOptionButton;
+	UPROPERTY(BlueprintReadWrite, Category= Buttons, meta=(BindWidget))
+	UButton* GraphicsOptionButton;
 
 	UFUNCTION()
 	void OnAudioOptionButtonClicked();
 	UFUNCTION()
-	void OnGraphicsOptionButtonClicked();
+	void OnDisplayOptionButtonClicked();
 	UFUNCTION()
 	void OnGameplayOptionButtonClicked();
 	UFUNCTION()
 	void OnControlsOptionButtonClicked();
+	UFUNCTION()
+	void OnGraphicsOptionButtonClicked();
 
-	//Logic for the GraphicsOptionPanel
-	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	//Logic for the DisplayOptionPanel
+	UPROPERTY(BlueprintReadWrite, Category= DisplayOption, meta=(BindWidget))
 	UComboBoxString* WindowModeComboBox;
 
-	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UPROPERTY(BlueprintReadWrite, Category= DisplayOption, meta=(BindWidget))
 	UComboBoxString* ResolutionComboBox;
 
-	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UPROPERTY(BlueprintReadWrite, Category= DisplayOption, meta=(BindWidget))
 	UComboBoxString* QualityPresetComboBox;
 
-	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
-	UButton* AdvancedSettingsButton;
-
-	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UPROPERTY(BlueprintReadWrite, Category= DisplayOption, meta=(BindWidget))
 	UCheckBox* VSyncCheckBox;
 	
-	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UPROPERTY(BlueprintReadWrite, Category= DisplayOption, meta=(BindWidget))
 	USlider* BrightnessSlider;
 
-	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UPROPERTY(BlueprintReadWrite, Category= DisplayOption, meta=(BindWidget))
 	USlider* GammaSlider;
 
-	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UPROPERTY(BlueprintReadWrite, Category= DisplayOption, meta=(BindWidget))
 	UButton* ApplyButton;
 
-	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UPROPERTY(BlueprintReadWrite, Category= DisplayOption, meta=(BindWidget))
 	UButton* ResetButton;
 	
 	UFUNCTION(BlueprintCallable)
