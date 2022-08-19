@@ -56,8 +56,8 @@ void USettingsMenuWidget::SetActionFunctionsForInputs()
 	BrightnessSlider->OnValueChanged.AddDynamic(this, &USettingsMenuWidget::SetBrightness);
 	GammaSlider->OnValueChanged.AddDynamic(this, &USettingsMenuWidget::SetGamma);
 	
-	ApplyButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::ApplySettings);
-	ResetButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::ResetSettings);
+	DisplayApplyButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::ApplySettings);
+	DisplayResetButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::ResetSettings);
 }
 
 void USettingsMenuWidget::NativeConstruct()
@@ -165,8 +165,6 @@ void USettingsMenuWidget::ResetSettings()
 	GammaSlider->SetValue(0.5f);
 	GetOwningPlayer()->ConsoleCommand("gamma " + FString::SanitizeFloat(2.2f));
 	//TODO: Reset the settings to the default values
-
-	
 }
 
 

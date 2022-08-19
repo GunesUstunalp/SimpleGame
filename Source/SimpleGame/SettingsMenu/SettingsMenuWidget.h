@@ -3,6 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AudioOptionPanel.h"
+#include "ControlsOptionPanel.h"
+#include "DisplayOptionPanel.h"
+#include "GameplayOptionPanel.h"
+#include "GraphicsOptionPanel.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
 #include "Components/CanvasPanel.h"
@@ -26,15 +31,15 @@ public:
 	UGameUserSettings* Settings; //pointer to the game user settings
 	
 	UPROPERTY(BlueprintReadWrite, Category= Panels, meta=(BindWidget))
-    UCanvasPanel* AudioOptionPanel;
+    UAudioOptionPanel* AudioOptionPanel;
 	UPROPERTY(BlueprintReadWrite, Category= Panels, meta=(BindWidget))
-    UCanvasPanel* DisplayOptionPanel;
+    UDisplayOptionPanel* DisplayOptionPanel;
 	UPROPERTY(BlueprintReadWrite, Category= Panels, meta=(BindWidget))
-    UCanvasPanel* GameplayOptionPanel;
+    UGameplayOptionPanel* GameplayOptionPanel;
 	UPROPERTY(BlueprintReadWrite, Category= Panels, meta=(BindWidget))
-    UCanvasPanel* ControlsOptionPanel;
+    UControlsOptionPanel* ControlsOptionPanel;
 	UPROPERTY(BlueprintReadWrite, Category= Panels, meta=(BindWidget))
-	UCanvasPanel* GraphicsOptionPanel;
+	UGraphicsOptionPanel* GraphicsOptionPanel;
 
 	UPROPERTY(BlueprintReadWrite, Category = Panels, meta = (BindWidget))
 	UWidgetSwitcher* OptionSwitcher;
@@ -82,10 +87,10 @@ public:
 	USlider* GammaSlider;
 
 	UPROPERTY(BlueprintReadWrite, Category= DisplayOption, meta=(BindWidget))
-	UButton* ApplyButton;
+	UButton* DisplayApplyButton;
 
 	UPROPERTY(BlueprintReadWrite, Category= DisplayOption, meta=(BindWidget))
-	UButton* ResetButton;
+	UButton* DisplayResetButton;
 	
 	UFUNCTION(BlueprintCallable)
 	void SetResolution(FString Resolution, ESelectInfo::Type SelectionType); //if it gives an error, make sure to enable "Slate" and "SlateCore" in the build.cs file
