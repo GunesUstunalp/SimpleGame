@@ -13,5 +13,10 @@ UCLASS()
 class SIMPLEGAME_API UControlsOptionPanel : public UCanvasPanel
 {
 	GENERATED_BODY()
+public:
+	void OnMouseSensitivitySliderValueChanged(float Value);
+
+	void OnControlsApplyButtonClicked();
+	void OnControlsResetButtonClicked();
 	
 };

@@ -13,5 +13,14 @@ UCLASS()
 class SIMPLEGAME_API UGameplayOptionPanel : public UCanvasPanel
 {
 	GENERATED_BODY()
-	
+public:
+	void OnLanguageComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType);
+
+	void OnSubtitlesCheckBoxSelectionChanged(bool Selection);
+	void OnBloodCheckBoxSelectionChanged(bool Selection);
+	void OnGoreCheckBoxSelectionChanged(bool Selection);
+	void OnInsectsCheckBoxSelectionChanged(bool Selection);
+
+	void OnGameplayApplyButtonClicked();
+	void OnGameplayResetButtonClicked();
 };

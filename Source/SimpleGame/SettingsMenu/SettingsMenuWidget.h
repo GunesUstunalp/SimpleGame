@@ -75,9 +75,6 @@ public:
 	UComboBoxString* ResolutionComboBox;
 
 	UPROPERTY(BlueprintReadWrite, Category= DisplayOption, meta=(BindWidget))
-	UComboBoxString* QualityPresetComboBox;
-
-	UPROPERTY(BlueprintReadWrite, Category= DisplayOption, meta=(BindWidget))
 	UCheckBox* VSyncCheckBox;
 	
 	UPROPERTY(BlueprintReadWrite, Category= DisplayOption, meta=(BindWidget))
@@ -92,6 +89,106 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category= DisplayOption, meta=(BindWidget))
 	UButton* DisplayResetButton;
 	
+	//Logic for the AudioOptionPanel
+	UPROPERTY(BlueprintReadWrite, Category= AudioOption, meta=(BindWidget))
+	USlider* MasterSlider;
+	
+	UPROPERTY(BlueprintReadWrite, Category= AudioOption, meta=(BindWidget))
+	USlider* SFXSlider;
+	
+	UPROPERTY(BlueprintReadWrite, Category= AudioOption, meta=(BindWidget))
+	USlider* AmbianceSlider;
+	
+	UPROPERTY(BlueprintReadWrite, Category= AudioOption, meta=(BindWidget))
+	USlider* MusicSlider;
+	
+	UPROPERTY(BlueprintReadWrite, Category= AudioOption, meta=(BindWidget))
+	USlider* VoiceSlider;
+
+	UPROPERTY(BlueprintReadWrite, Category= AudioOption, meta=(BindWidget))
+	UButton* AudioResetButton;
+
+	UPROPERTY(BlueprintReadWrite, Category= AudioOption, meta=(BindWidget))
+	UButton* AudioApplyButton;
+
+	//Logic for the GameplayOptionPanel
+	UPROPERTY(BlueprintReadWrite, Category= GameplayOption, meta=(BindWidget))
+	UComboBoxString* LanguageComboBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GameplayOption, meta=(BindWidget))
+	UCheckBox* SubtitlesCheckBox;
+	
+	UPROPERTY(BlueprintReadWrite, Category= GameplayOption, meta=(BindWidget))
+	UCheckBox* BloodCheckBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GameplayOption, meta=(BindWidget))
+	UCheckBox* GoreCheckBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GameplayOption, meta=(BindWidget))
+	UCheckBox* InsectsCheckBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GameplayOption, meta=(BindWidget))
+	UButton* GameplayApplyButton;
+	
+	UPROPERTY(BlueprintReadWrite, Category= GameplayOption, meta=(BindWidget))
+	UButton* GameplayResetButton;
+	
+	//Logic for the ControlsOptionPanel
+	UPROPERTY(BlueprintReadWrite, Category= ControlsOption, meta=(BindWidget))
+	USlider* MouseSensitivitySlider;
+
+	UPROPERTY(BlueprintReadWrite, Category= ControlsOption, meta=(BindWidget))
+	UButton* ControlsApplyButton;
+	
+	UPROPERTY(BlueprintReadWrite, Category= ControlsOption, meta=(BindWidget))
+	UButton* ControlsResetButton;
+	
+	//Logic for the GraphicsOptionPanel
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UComboBoxString* QualityPresetComboBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UButton* GraphicsAutoDetectButton;
+	
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UComboBoxString* ResolutionQualityComboBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UComboBoxString* ViewDistanceComboBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UComboBoxString* AntiAliasingComboBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UComboBoxString* ShadowQualityComboBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UComboBoxString* GlobalIlluminationQualityComboBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UComboBoxString* ReflectionQualityComboBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UComboBoxString* PostProcessQualityComboBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UComboBoxString* TextureQualityComboBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UComboBoxString* EffectsQualityComboBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UComboBoxString* FoliageQualityComboBox;
+
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UComboBoxString* ShadingQualityComboBox;
+	
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UButton* GraphicsApplyButton;
+	
+	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
+	UButton* GraphicsResetButton;
+
 	UFUNCTION(BlueprintCallable)
 	void SetResolution(FString Resolution, ESelectInfo::Type SelectionType); //if it gives an error, make sure to enable "Slate" and "SlateCore" in the build.cs file
 
@@ -116,14 +213,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ResetSettings();
 	
-	//Logic for the AudioOptionPanel
-	//TODO
-
-	//Logic for the GameplayOptionPanel
-	//TODO
-
-	//Logic for the ControlsOptionPanel
-	//TODO
 private:
 	void SetCurrentOptionsToAllFields(); //To be used when the menu first opens
 	void SetActionFunctionsForInputs(); //To be used in the constructor

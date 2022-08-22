@@ -3,3 +3,6 @@
 
 #include "AudioOptionPanel.h"
 
+void UAudioOptionPanel::OnMasterSliderValueChanged(float Value)
+{
+}
