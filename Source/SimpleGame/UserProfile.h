@@ -13,11 +13,13 @@ UCLASS()
 class SIMPLEGAME_API UUserProfile : public USaveGame
 {
 	GENERATED_BODY()
+public:
 	UUserProfile();
 	UUserProfile(UUserProfile &Other); // Copy constructor
 
 	bool operator==(const UUserProfile &Other) const;
 
+	
 	//Display Options
 	bool VSyncEnabled;
 	EWindowMode::Type WindowMode;
@@ -55,4 +57,7 @@ class SIMPLEGAME_API UUserProfile : public USaveGame
 
 	//Controls Options
 	float MouseSensitivity;
+	
+private:
+	void setQualityPresetIndex(int Index); // Set the quality preset index and sets all the quality indexes to the preset index
 };
