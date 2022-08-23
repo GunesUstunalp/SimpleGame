@@ -3,3 +3,14 @@
 
 #include "ControlsOptionPanel.h"
 
+void UControlsOptionPanel::OnMouseSensitivitySliderValueChanged(float Value)
+{
+}
+
+void UControlsOptionPanel::OnControlsApplyButtonClicked()
+{
+}
+
+void UControlsOptionPanel::OnControlsResetButtonClicked()
+{
+}

@@ -65,39 +65,39 @@ void USettingsMenuWidget::SetActionFunctionsForInputs()
 	VSyncCheckBox->OnCheckStateChanged.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnVSyncCheckBoxSelectionChanged);
 	BrightnessSlider->OnValueChanged.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnBrightnessSliderValueChanged);
 	GammaSlider->OnValueChanged.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnGammaSliderValueChanged);
-	// DisplayApplyButton->OnClicked.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnDisplayApplyButtonClicked);
-	// DisplayResetButton->OnClicked.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnDisplayResetButtonClicked);
+	DisplayApplyButton->OnClicked.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnDisplayApplyButtonClicked);
+	DisplayResetButton->OnClicked.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnDisplayResetButtonClicked);
 	
-	// //Gameplay option panel
-	// LanguageComboBox->OnSelectionChanged.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnLanguageComboBoxSelectionChanged);
-	// SubtitlesCheckBox->OnCheckStateChanged.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnSubtitlesCheckBoxSelectionChanged);
-	// BloodCheckBox->OnCheckStateChanged.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnBloodCheckBoxSelectionChanged);
-	// GoreCheckBox->OnCheckStateChanged.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnGoreCheckBoxSelectionChanged);
-	// InsectsCheckBox->OnCheckStateChanged.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnInsectsCheckBoxSelectionChanged);
-	// GameplayApplyButton->OnClicked.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnGameplayApplyButtonClicked);
-	// GameplayResetButton->OnClicked.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnGameplayResetButtonClicked);
-	//
-	// //Controls option panel
-	// MouseSensitivitySlider->OnValueChanged.AddDynamic(ControlsOptionPanel, &UControlsOptionPanel::OnMouseSensitivitySliderValueChanged);
-	// ControlsApplyButton->OnClicked.AddDynamic(ControlsOptionPanel, &UControlsOptionPanel::OnControlsApplyButtonClicked);
-	// ControlsResetButton->OnClicked.AddDynamic(ControlsOptionPanel, &UControlsOptionPanel::OnControlsResetButtonClicked);
-	//
-	// //Graphics option panel
-	// QualityPresetComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnQualityPresetComboBoxSelectionChanged);
-	// GraphicsAutoDetectButton->OnClicked.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnGraphicsAutoDetectButtonClicked);
-	// ResolutionQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnResolutionQualityComboBoxSelectionChanged);
-	// ViewDistanceComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnViewDistanceComboBoxSelectionChanged);
-	// AntiAliasingComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnAntiAliasingComboBoxSelectionChanged);
-	// ShadowQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnShadowQualityComboBoxSelectionChanged);
-	// GlobalIlluminationQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnGlobalIlluminationComboBoxSelectionChanged);
-	// ReflectionQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnReflectionQualityComboBoxSelectionChanged);
-	// PostProcessQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnPostProcessQualityComboBoxSelectionChanged);
-	// TextureQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnTextureQualityComboBoxSelectionChanged);
-	// EffectsQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnEffectsQualityComboBoxSelectionChanged);
-	// FoliageQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnFoliageQualityComboBoxSelectionChanged);
-	// ShadingQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnShadingQualityComboBoxSelectionChanged);
-	// GraphicsApplyButton->OnClicked.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::UGraphicsOptionPanel::OnGraphicsApplyButtonClicked);
-	// GraphicsResetButton->OnClicked.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::UGraphicsOptionPanel::OnGraphicsResetButtonClicked);
+	//Gameplay option panel
+	LanguageComboBox->OnSelectionChanged.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnLanguageComboBoxSelectionChanged);
+	SubtitlesCheckBox->OnCheckStateChanged.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnSubtitlesCheckBoxSelectionChanged);
+	BloodCheckBox->OnCheckStateChanged.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnBloodCheckBoxSelectionChanged);
+	GoreCheckBox->OnCheckStateChanged.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnGoreCheckBoxSelectionChanged);
+	InsectsCheckBox->OnCheckStateChanged.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnInsectsCheckBoxSelectionChanged);
+	GameplayApplyButton->OnClicked.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnGameplayApplyButtonClicked);
+	GameplayResetButton->OnClicked.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnGameplayResetButtonClicked);
+	
+	//Controls option panel
+	MouseSensitivitySlider->OnValueChanged.AddDynamic(ControlsOptionPanel, &UControlsOptionPanel::OnMouseSensitivitySliderValueChanged);
+	ControlsApplyButton->OnClicked.AddDynamic(ControlsOptionPanel, &UControlsOptionPanel::OnControlsApplyButtonClicked);
+	ControlsResetButton->OnClicked.AddDynamic(ControlsOptionPanel, &UControlsOptionPanel::OnControlsResetButtonClicked);
+	
+	//Graphics option panel
+	QualityPresetComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnQualityPresetComboBoxSelectionChanged);
+	GraphicsAutoDetectButton->OnClicked.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnGraphicsAutoDetectButtonClicked);
+	ResolutionQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnResolutionQualityComboBoxSelectionChanged);
+	ViewDistanceComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnViewDistanceComboBoxSelectionChanged);
+	AntiAliasingComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnAntiAliasingComboBoxSelectionChanged);
+	ShadowQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnShadowQualityComboBoxSelectionChanged);
+	GlobalIlluminationQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnGlobalIlluminationComboBoxSelectionChanged);
+	ReflectionQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnReflectionQualityComboBoxSelectionChanged);
+	PostProcessQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnPostProcessQualityComboBoxSelectionChanged);
+	TextureQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnTextureQualityComboBoxSelectionChanged);
+	EffectsQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnEffectsQualityComboBoxSelectionChanged);
+	FoliageQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnFoliageQualityComboBoxSelectionChanged);
+	ShadingQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnShadingQualityComboBoxSelectionChanged);
+	GraphicsApplyButton->OnClicked.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::UGraphicsOptionPanel::OnGraphicsApplyButtonClicked);
+	GraphicsResetButton->OnClicked.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::UGraphicsOptionPanel::OnGraphicsResetButtonClicked);
 }
 
 void USettingsMenuWidget::NativeConstruct()
