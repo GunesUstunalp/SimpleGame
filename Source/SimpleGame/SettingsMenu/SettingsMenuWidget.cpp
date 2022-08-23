@@ -60,7 +60,7 @@ void USettingsMenuWidget::SetActionFunctionsForInputs()
 	AudioResetButton->OnClicked.AddDynamic(AudioOptionPanel, &UAudioOptionPanel::OnAudioResetButtonClicked);
 
 	//Display option panel
-	WindowModeComboBox->OnSelectionChanged.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnWindowModeComboBoxSelectionChanged);
+	WindowModeComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::WindowModeComboBoxHelper);
 	ResolutionComboBox->OnSelectionChanged.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnResolutionComboBoxSelectionChanged);
 	VSyncCheckBox->OnCheckStateChanged.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnVSyncCheckBoxSelectionChanged);
 	BrightnessSlider->OnValueChanged.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnBrightnessSliderValueChanged);
@@ -83,21 +83,30 @@ void USettingsMenuWidget::SetActionFunctionsForInputs()
 	ControlsResetButton->OnClicked.AddDynamic(ControlsOptionPanel, &UControlsOptionPanel::OnControlsResetButtonClicked);
 	
 	//Graphics option panel
-	QualityPresetComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnQualityPresetComboBoxSelectionChanged);
+	QualityPresetComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::QualityPresetComboBoxHelper);
+	ResolutionQualityComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::ResolutionQualityComboBoxHelper);
+	ViewDistanceComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::ViewDistanceComboBoxHelper);
+	AntiAliasingComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::AntiAliasingComboBoxHelper);
+	ShadowQualityComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::ShadowQualityComboBoxHelper);
+	GlobalIlluminationQualityComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::GlobalIlluminationComboBoxHelper);
+	ReflectionQualityComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::ReflectionQualityComboBoxHelper);
+	PostProcessQualityComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::PostProcessComboBoxHelper);
+	TextureQualityComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::TextureQualityComboBoxHelper);
+	EffectsQualityComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::EffectsQualityComboBoxHelper);
+	FoliageQualityComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::FoliageQualityComboBoxHelper);
+	ShadingQualityComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::ShadingQualityComboBoxHelper);
 	GraphicsAutoDetectButton->OnClicked.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnGraphicsAutoDetectButtonClicked);
-	ResolutionQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnResolutionQualityComboBoxSelectionChanged);
-	ViewDistanceComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnViewDistanceComboBoxSelectionChanged);
-	AntiAliasingComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnAntiAliasingComboBoxSelectionChanged);
-	ShadowQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnShadowQualityComboBoxSelectionChanged);
-	GlobalIlluminationQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnGlobalIlluminationComboBoxSelectionChanged);
-	ReflectionQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnReflectionQualityComboBoxSelectionChanged);
-	PostProcessQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnPostProcessQualityComboBoxSelectionChanged);
-	TextureQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnTextureQualityComboBoxSelectionChanged);
-	EffectsQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnEffectsQualityComboBoxSelectionChanged);
-	FoliageQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnFoliageQualityComboBoxSelectionChanged);
-	ShadingQualityComboBox->OnSelectionChanged.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnShadingQualityComboBoxSelectionChanged);
-	GraphicsApplyButton->OnClicked.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::UGraphicsOptionPanel::OnGraphicsApplyButtonClicked);
-	GraphicsResetButton->OnClicked.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::UGraphicsOptionPanel::OnGraphicsResetButtonClicked);
+	GraphicsApplyButton->OnClicked.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnGraphicsApplyButtonClicked);
+	GraphicsResetButton->OnClicked.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnGraphicsResetButtonClicked);
+}
+
+void USettingsMenuWidget::SetUserSettingsProfilePointersForOptionPanels()
+{
+	AudioOptionPanel->UserSettingsProfile = CurrentSettingsProfile;
+	DisplayOptionPanel->UserSettingsProfile = CurrentSettingsProfile;
+	GameplayOptionPanel->UserSettingsProfile = CurrentSettingsProfile;
+	ControlsOptionPanel->UserSettingsProfile = CurrentSettingsProfile;
+	GraphicsOptionPanel->UserSettingsProfile = CurrentSettingsProfile;
 }
 
 void USettingsMenuWidget::NativeConstruct()
@@ -105,10 +114,11 @@ void USettingsMenuWidget::NativeConstruct()
 	Super::NativeConstruct();
 	Settings = GEngine->GetGameUserSettings();
 
+	CurrentSettingsProfile = NewObject<UUserSettingsProfile>();
+
 	OnAudioOptionButtonClicked(); // Show the audio panel by default
-
 	SetCurrentOptionsToAllFields();
-
+	SetUserSettingsProfilePointersForOptionPanels();
 	SetActionFunctionsForInputs();
 }
 

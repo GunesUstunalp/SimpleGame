@@ -5,10 +5,12 @@
 
 void UControlsOptionPanel::OnMouseSensitivitySliderValueChanged(float Value)
 {
+	UserSettingsProfile->MouseSensitivity = Value;
 }
 
 void UControlsOptionPanel::OnControlsApplyButtonClicked()
 {
+	UserSettingsProfile->Print();
 }
 
 void UControlsOptionPanel::OnControlsResetButtonClicked()

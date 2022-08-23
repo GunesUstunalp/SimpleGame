@@ -27,6 +27,7 @@ class SIMPLEGAME_API USettingsMenuWidget : public UUserWidget
 {
 	GENERATED_BODY()
 public:
+	UPROPERTY()
 	UUserSettingsProfile* CurrentSettingsProfile;
 	
 	UFUNCTION()
@@ -192,6 +193,41 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category= GraphicsOption, meta=(BindWidget))
 	UButton* GraphicsResetButton;
 
+	//ComboBox helper functions
+	/**
+	 *The SelectionChanged bind functions of the comboboxes normally send the selected string to the binded function
+	 *We want to send the selected indexes instead
+	 *By using indexes, we can make the functions string agnostic i.e. setting a combobox "Very Low" and "Potato" would yield the same result
+	 *The category names can be changed at will without changing the index order
+	 *In order to achieve it, we use helper functions below
+	 */
+	UFUNCTION()
+	void WindowModeComboBoxHelper(FString Selection, ESelectInfo::Type SelectionType){DisplayOptionPanel->OnWindowModeComboBoxSelectionChanged(WindowModeComboBox->GetSelectedIndex());}
+	UFUNCTION()
+	void QualityPresetComboBoxHelper(FString Selection, ESelectInfo::Type SelectionType){GraphicsOptionPanel->OnQualityPresetComboBoxSelectionChanged(QualityPresetComboBox->GetSelectedIndex());}
+	UFUNCTION()
+	void ResolutionQualityComboBoxHelper(FString Selection, ESelectInfo::Type SelectionType){GraphicsOptionPanel->OnResolutionQualityComboBoxSelectionChanged(ResolutionQualityComboBox->GetSelectedIndex());}
+	UFUNCTION()
+	void ViewDistanceComboBoxHelper(FString Selection, ESelectInfo::Type SelectionType){GraphicsOptionPanel->OnViewDistanceComboBoxSelectionChanged(ViewDistanceComboBox->GetSelectedIndex());}
+	UFUNCTION()
+	void AntiAliasingComboBoxHelper(FString Selection, ESelectInfo::Type SelectionType){GraphicsOptionPanel->OnAntiAliasingComboBoxSelectionChanged(AntiAliasingComboBox->GetSelectedIndex());}
+	UFUNCTION()
+	void ShadowQualityComboBoxHelper(FString Selection, ESelectInfo::Type SelectionType){GraphicsOptionPanel->OnShadowQualityComboBoxSelectionChanged(ShadowQualityComboBox->GetSelectedIndex());}
+	UFUNCTION()
+	void GlobalIlluminationComboBoxHelper(FString Selection, ESelectInfo::Type SelectionType){GraphicsOptionPanel->OnGlobalIlluminationComboBoxSelectionChanged(GlobalIlluminationQualityComboBox->GetSelectedIndex());}
+	UFUNCTION()
+	void ReflectionQualityComboBoxHelper(FString Selection, ESelectInfo::Type SelectionType){GraphicsOptionPanel->OnReflectionQualityComboBoxSelectionChanged(ReflectionQualityComboBox->GetSelectedIndex());}
+	UFUNCTION()
+	void PostProcessComboBoxHelper(FString Selection, ESelectInfo::Type SelectionType){GraphicsOptionPanel->OnPostProcessQualityComboBoxSelectionChanged(PostProcessQualityComboBox->GetSelectedIndex());}
+	UFUNCTION()
+	void TextureQualityComboBoxHelper(FString Selection, ESelectInfo::Type SelectionType){GraphicsOptionPanel->OnTextureQualityComboBoxSelectionChanged(TextureQualityComboBox->GetSelectedIndex());}
+	UFUNCTION()
+	void EffectsQualityComboBoxHelper(FString Selection, ESelectInfo::Type SelectionType){GraphicsOptionPanel->OnEffectsQualityComboBoxSelectionChanged(EffectsQualityComboBox->GetSelectedIndex());}
+	UFUNCTION()
+	void FoliageQualityComboBoxHelper(FString Selection, ESelectInfo::Type SelectionType){GraphicsOptionPanel->OnFoliageQualityComboBoxSelectionChanged(FoliageQualityComboBox->GetSelectedIndex());}
+	UFUNCTION()
+	void ShadingQualityComboBoxHelper(FString Selection, ESelectInfo::Type SelectionType){GraphicsOptionPanel->OnShadingQualityComboBoxSelectionChanged(ShadingQualityComboBox->GetSelectedIndex());}
+	
 	UFUNCTION(BlueprintCallable)
 	void SetResolution(FString Resolution, ESelectInfo::Type SelectionType); //if it gives an error, make sure to enable "Slate" and "SlateCore" in the build.cs file
 
@@ -219,4 +255,5 @@ public:
 private:
 	void SetCurrentOptionsToAllFields(); //To be used when the menu first opens
 	void SetActionFunctionsForInputs(); //To be used in the constructor
+	void SetUserSettingsProfilePointersForOptionPanels(); //To be used in the constructor
 };

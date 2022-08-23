@@ -104,4 +104,38 @@ void UUserSettingsProfile::setQualityPresetIndex(int Index)
 	}
 }
 
+void UUserSettingsProfile::Print()
+{
+	UE_LOG(LogTemp, Warning, TEXT("SettingsProfile: "));
+	UE_LOG(LogTemp, Warning, TEXT("VSync: %d"), VSyncEnabled);
+	UE_LOG(LogTemp, Warning, TEXT("WindowMode: %d"), WindowMode);
+	UE_LOG(LogTemp, Warning, TEXT("Resolution: %s"), *Resolution);
+	UE_LOG(LogTemp, Warning, TEXT("Gamma: %f"), Gamma);
+	UE_LOG(LogTemp, Warning, TEXT("Brightness: %f"), Brightness);
+	UE_LOG(LogTemp, Warning, TEXT("QualityPresetIndex: %d"), QualityPresetIndex);
+	UE_LOG(LogTemp, Warning, TEXT("ResolutionQuality: %d"), ResolutionQuality);
+	UE_LOG(LogTemp, Warning, TEXT("ViewDistanceQuality: %d"), ViewDistanceQuality);
+	UE_LOG(LogTemp, Warning, TEXT("AntiAliasingQuality: %d"), AntiAliasingQuality);
+	UE_LOG(LogTemp, Warning, TEXT("ShadowQuality: %d"), ShadowQuality);
+	UE_LOG(LogTemp, Warning, TEXT("GlobalIlluminationQuality: %d"), GlobalIlluminationQuality);
+	UE_LOG(LogTemp, Warning, TEXT("ReflectionQuality: %d"), ReflectionQuality);
+	UE_LOG(LogTemp, Warning, TEXT("PostProcessQuality: %d"), PostProcessQuality);
+	UE_LOG(LogTemp, Warning, TEXT("TextureQuality: %d"), TextureQuality);
+	UE_LOG(LogTemp, Warning, TEXT("EffectsQuality: %d"), EffectsQuality);
+	UE_LOG(LogTemp, Warning, TEXT("FoliageQuality: %d"), FoliageQuality);
+	UE_LOG(LogTemp, Warning, TEXT("ShadingQuality: %d"), ShadingQuality);
+	UE_LOG(LogTemp, Warning, TEXT("MasterVolume: %f"), MasterVolume);
+	UE_LOG(LogTemp, Warning, TEXT("MusicVolume: %f"), MusicVolume);
+	UE_LOG(LogTemp, Warning, TEXT("SFXVolume: %f"), SFXVolume);
+	UE_LOG(LogTemp, Warning, TEXT("VoiceVolume: %f"), VoiceVolume);
+	UE_LOG(LogTemp, Warning, TEXT("AmbianceVolume: %f"), AmbianceVolume);
+	UE_LOG(LogTemp, Warning, TEXT("IsBloodEnabled: %d"), IsBloodEnabled);
+	UE_LOG(LogTemp, Warning, TEXT("IsGoreEnabled: %d"), IsGoreEnabled);
+	UE_LOG(LogTemp, Warning, TEXT("IsInsectsEnabled: %d"), IsInsectsEnabled);
+	UE_LOG(LogTemp, Warning, TEXT("Language: %s"), *Language);
+	UE_LOG(LogTemp, Warning, TEXT("IsSubtitleEnabled: %d"), IsSubtitleEnabled);
+	UE_LOG(LogTemp, Warning, TEXT("MouseSensitivity: %f"), MouseSensitivity);
+}
+
+
 

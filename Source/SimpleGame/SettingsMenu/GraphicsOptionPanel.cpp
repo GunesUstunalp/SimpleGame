@@ -3,64 +3,74 @@
 
 #include "GraphicsOptionPanel.h"
 
-void UGraphicsOptionPanel::OnQualityPresetComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType)
+void UGraphicsOptionPanel::OnQualityPresetComboBoxSelectionChanged(int SelectedIndex)
 {
+	UserSettingsProfile->QualityPresetIndex = 4 - SelectedIndex;
 }
 
 void UGraphicsOptionPanel::OnGraphicsAutoDetectButtonClicked()
 {
+	
 }
 
-void UGraphicsOptionPanel::OnResolutionQualityComboBoxSelectionChanged(FString Selection,
-	ESelectInfo::Type SelectionType)
+void UGraphicsOptionPanel::OnResolutionQualityComboBoxSelectionChanged(int SelectedIndex)
 {
+	UserSettingsProfile->ResolutionQuality = 4 - SelectedIndex;
 }
 
-void UGraphicsOptionPanel::OnViewDistanceComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType)
+void UGraphicsOptionPanel::OnViewDistanceComboBoxSelectionChanged(int SelectedIndex)
 {
+	UserSettingsProfile->ViewDistanceQuality = 4 - SelectedIndex;
 }
 
-void UGraphicsOptionPanel::OnAntiAliasingComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType)
+void UGraphicsOptionPanel::OnAntiAliasingComboBoxSelectionChanged(int SelectedIndex)
 {
+	UserSettingsProfile->AntiAliasingQuality = 4 - SelectedIndex;
 }
 
-void UGraphicsOptionPanel::OnShadowQualityComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType)
+void UGraphicsOptionPanel::OnShadowQualityComboBoxSelectionChanged(int SelectedIndex)
 {
+	UserSettingsProfile->ShadowQuality = 4 - SelectedIndex;
 }
 
-void UGraphicsOptionPanel::OnGlobalIlluminationComboBoxSelectionChanged(FString Selection,
-	ESelectInfo::Type SelectionType)
+void UGraphicsOptionPanel::OnGlobalIlluminationComboBoxSelectionChanged(int SelectedIndex)
 {
+	UserSettingsProfile->GlobalIlluminationQuality = 4 - SelectedIndex;
 }
 
-void UGraphicsOptionPanel::OnReflectionQualityComboBoxSelectionChanged(FString Selection,
-	ESelectInfo::Type SelectionType)
+void UGraphicsOptionPanel::OnReflectionQualityComboBoxSelectionChanged(int SelectedIndex)
 {
+	UserSettingsProfile->ReflectionQuality = 4 - SelectedIndex;
 }
 
-void UGraphicsOptionPanel::OnPostProcessQualityComboBoxSelectionChanged(FString Selection,
-	ESelectInfo::Type SelectionType)
+void UGraphicsOptionPanel::OnPostProcessQualityComboBoxSelectionChanged(int SelectedIndex)
 {
+	UserSettingsProfile->PostProcessQuality = 4 - SelectedIndex;
 }
 
-void UGraphicsOptionPanel::OnTextureQualityComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType)
+void UGraphicsOptionPanel::OnTextureQualityComboBoxSelectionChanged(int SelectedIndex)
 {
+	UserSettingsProfile->TextureQuality = 4 - SelectedIndex;
 }
 
-void UGraphicsOptionPanel::OnEffectsQualityComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType)
+void UGraphicsOptionPanel::OnEffectsQualityComboBoxSelectionChanged(int SelectedIndex)
 {
+	UserSettingsProfile->EffectsQuality = 4 - SelectedIndex;
 }
 
-void UGraphicsOptionPanel::OnFoliageQualityComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType)
+void UGraphicsOptionPanel::OnFoliageQualityComboBoxSelectionChanged(int SelectedIndex)
 {
+	UserSettingsProfile->FoliageQuality = 4 - SelectedIndex;
 }
 
-void UGraphicsOptionPanel::OnShadingQualityComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType)
+void UGraphicsOptionPanel::OnShadingQualityComboBoxSelectionChanged(int SelectedIndex)
 {
+	UserSettingsProfile->ShadingQuality = 4 - SelectedIndex;
 }
 
 void UGraphicsOptionPanel::OnGraphicsApplyButtonClicked()
 {
+	UserSettingsProfile->Print();
 }
 
 void UGraphicsOptionPanel::OnGraphicsResetButtonClicked()
