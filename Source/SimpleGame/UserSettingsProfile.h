@@ -4,20 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
-#include "UserProfile.generated.h"
+#include "UserSettingsProfile.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class SIMPLEGAME_API UUserProfile : public USaveGame
+class SIMPLEGAME_API UUserSettingsProfile : public USaveGame
 {
 	GENERATED_BODY()
 public:
-	UUserProfile();
-	UUserProfile(UUserProfile &Other); // Copy constructor
+	UUserSettingsProfile();
+	UUserSettingsProfile(UUserSettingsProfile &Other); // Copy constructor
 
-	bool operator==(const UUserProfile &Other) const;
+	bool operator==(const UUserSettingsProfile &Other) const;
 
 	
 	//Display Options

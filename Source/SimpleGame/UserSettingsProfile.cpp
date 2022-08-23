@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "UserProfile.h"
+#include "UserSettingsProfile.h"
 
-UUserProfile::UUserProfile()
+UUserSettingsProfile::UUserSettingsProfile()
 {
 	VSyncEnabled = true;
 	WindowMode = EWindowMode::Windowed;
@@ -28,7 +28,7 @@ UUserProfile::UUserProfile()
 	MouseSensitivity = 0.5f;
 }
 
-UUserProfile::UUserProfile(UUserProfile& Other)
+UUserSettingsProfile::UUserSettingsProfile(UUserSettingsProfile& Other)
 {
 	VSyncEnabled = Other.VSyncEnabled;
 	WindowMode = Other.WindowMode;
@@ -64,7 +64,7 @@ UUserProfile::UUserProfile(UUserProfile& Other)
 	MouseSensitivity = Other.MouseSensitivity;
 }
 
-bool UUserProfile::operator==(const UUserProfile& Other) const
+bool UUserSettingsProfile::operator==(const UUserSettingsProfile& Other) const
 {
 	if(VSyncEnabled != Other.VSyncEnabled || WindowMode != Other.WindowMode || Resolution != Other.Resolution || Gamma != Other.Gamma || Brightness != Other.Brightness)
 		return false;
@@ -85,7 +85,7 @@ bool UUserProfile::operator==(const UUserProfile& Other) const
 }
 
 
-void UUserProfile::setQualityPresetIndex(int Index)
+void UUserSettingsProfile::setQualityPresetIndex(int Index)
 {
 	QualityPresetIndex = Index;
 	if(QualityPresetIndex != -1) //Custom -> -1

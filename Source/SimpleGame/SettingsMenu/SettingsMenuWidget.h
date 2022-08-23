@@ -16,6 +16,7 @@
 #include "Components/ComboBoxString.h"
 #include "Components/Slider.h"
 #include "Components/WidgetSwitcher.h"
+#include "SimpleGame/UserSettingsProfile.h"
 #include "SettingsMenuWidget.generated.h"
 
 /**
@@ -26,6 +27,8 @@ class SIMPLEGAME_API USettingsMenuWidget : public UUserWidget
 {
 	GENERATED_BODY()
 public:
+	UUserSettingsProfile* CurrentSettingsProfile;
+	
 	UFUNCTION()
 	void NativeConstruct() override; //constructor for the class
 	UGameUserSettings* Settings; //pointer to the game user settings
