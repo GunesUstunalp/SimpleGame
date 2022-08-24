@@ -229,24 +229,44 @@ public:
 	void ShadingQualityComboBoxHelper(FString Selection, ESelectInfo::Type SelectionType){GraphicsOptionPanel->OnShadingQualityComboBoxSelectionChanged(ShadingQualityComboBox->GetSelectedIndex());}
 	// UFUNCTION()
 	// void AudioApplyButtonHelper();
-	// UFUNCTION()
-	// void AudioResetButtonHelper();
+	UFUNCTION()
+	void AudioResetButtonHelper()
+	{
+		AudioOptionPanel->OnAudioResetButtonClicked();
+		SetCurrentOptionsToAllFields();
+	}
 	// UFUNCTION()
 	// void DisplayApplyButtonHelper();
-	// UFUNCTION()
-	// void DisplayResetButtonHelper();
+	UFUNCTION()
+	void DisplayResetButtonHelper()
+	{
+		DisplayOptionPanel->OnDisplayResetButtonClicked();
+		SetCurrentOptionsToAllFields();
+	}
 	// UFUNCTION()
 	// void GameplayApplyButtonHelper();
-	// UFUNCTION()
-	// void GameplayResetButtonHelper();
+	UFUNCTION()
+	void GameplayResetButtonHelper()
+	{
+		GameplayOptionPanel->OnGameplayResetButtonClicked();
+		SetCurrentOptionsToAllFields();
+	}
 	// UFUNCTION()
 	// void ControlsApplyButtonHelper();
-	// UFUNCTION()
-	// void ControlsResetButtonHelper();
+	UFUNCTION()
+	void ControlsResetButtonHelper()
+	{
+		ControlsOptionPanel->OnControlsResetButtonClicked();
+		SetCurrentOptionsToAllFields();
+	}
 	// UFUNCTION()
 	// void GraphicsApplyButtonHelper();
-	// UFUNCTION()
-	// void GraphicsResetButtonHelper();
+	UFUNCTION()
+	void GraphicsResetButtonHelper()
+	{
+		GraphicsOptionPanel->OnGraphicsResetButtonClicked();
+		SetCurrentOptionsToAllFields();
+	}
 	
 	UFUNCTION(BlueprintCallable)
 	void SetResolution(FString Resolution, ESelectInfo::Type SelectionType); //if it gives an error, make sure to enable "Slate" and "SlateCore" in the build.cs file

@@ -73,7 +73,7 @@ void USettingsMenuWidget::SetActionFunctionsForInputs()
 	MusicSlider->OnValueChanged.AddDynamic(AudioOptionPanel, &UAudioOptionPanel::OnMusicSliderValueChanged);
 	VoiceSlider->OnValueChanged.AddDynamic(AudioOptionPanel, &UAudioOptionPanel::OnVoiceSliderValueChanged);
 	AudioApplyButton->OnClicked.AddDynamic(AudioOptionPanel, &UAudioOptionPanel::OnAudioApplyButtonClicked);
-	AudioResetButton->OnClicked.AddDynamic(AudioOptionPanel, &UAudioOptionPanel::OnAudioResetButtonClicked);
+	AudioResetButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::AudioResetButtonHelper);
 
 	//Display option panel
 	WindowModeComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::WindowModeComboBoxHelper);
@@ -82,7 +82,7 @@ void USettingsMenuWidget::SetActionFunctionsForInputs()
 	BrightnessSlider->OnValueChanged.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnBrightnessSliderValueChanged);
 	GammaSlider->OnValueChanged.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnGammaSliderValueChanged);
 	DisplayApplyButton->OnClicked.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnDisplayApplyButtonClicked);
-	DisplayResetButton->OnClicked.AddDynamic(DisplayOptionPanel, &UDisplayOptionPanel::OnDisplayResetButtonClicked);
+	DisplayResetButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::DisplayResetButtonHelper);
 	
 	//Gameplay option panel
 	LanguageComboBox->OnSelectionChanged.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnLanguageComboBoxSelectionChanged);
@@ -91,12 +91,12 @@ void USettingsMenuWidget::SetActionFunctionsForInputs()
 	GoreCheckBox->OnCheckStateChanged.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnGoreCheckBoxSelectionChanged);
 	InsectsCheckBox->OnCheckStateChanged.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnInsectsCheckBoxSelectionChanged);
 	GameplayApplyButton->OnClicked.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnGameplayApplyButtonClicked);
-	GameplayResetButton->OnClicked.AddDynamic(GameplayOptionPanel, &UGameplayOptionPanel::OnGameplayResetButtonClicked);
+	GameplayResetButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::GameplayResetButtonHelper);
 	
 	//Controls option panel
 	MouseSensitivitySlider->OnValueChanged.AddDynamic(ControlsOptionPanel, &UControlsOptionPanel::OnMouseSensitivitySliderValueChanged);
 	ControlsApplyButton->OnClicked.AddDynamic(ControlsOptionPanel, &UControlsOptionPanel::OnControlsApplyButtonClicked);
-	ControlsResetButton->OnClicked.AddDynamic(ControlsOptionPanel, &UControlsOptionPanel::OnControlsResetButtonClicked);
+	ControlsResetButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::ControlsResetButtonHelper);
 	
 	//Graphics option panel
 	QualityPresetComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::QualityPresetComboBoxHelper);
@@ -113,7 +113,7 @@ void USettingsMenuWidget::SetActionFunctionsForInputs()
 	ShadingQualityComboBox->OnSelectionChanged.AddDynamic(this, &USettingsMenuWidget::ShadingQualityComboBoxHelper);
 	GraphicsAutoDetectButton->OnClicked.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnGraphicsAutoDetectButtonClicked);
 	GraphicsApplyButton->OnClicked.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnGraphicsApplyButtonClicked);
-	GraphicsResetButton->OnClicked.AddDynamic(GraphicsOptionPanel, &UGraphicsOptionPanel::OnGraphicsResetButtonClicked);
+	GraphicsResetButton->OnClicked.AddDynamic(this, &USettingsMenuWidget::GraphicsResetButtonHelper);
 }
 
 void USettingsMenuWidget::SetUserSettingsProfilePointersForOptionPanels()
