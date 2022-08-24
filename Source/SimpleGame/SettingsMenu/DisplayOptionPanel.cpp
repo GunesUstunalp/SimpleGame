@@ -48,6 +48,12 @@ void UDisplayOptionPanel::OnDisplayApplyButtonClicked()
 
 void UDisplayOptionPanel::OnDisplayResetButtonClicked()
 {
+	UserSettingsProfile->WindowMode = EWindowMode::Windowed;
+	UserSettingsProfile->Resolution = "1280x720";
+	UserSettingsProfile->VSyncEnabled = true;
+	UserSettingsProfile->Brightness = 0.5f;
+	UserSettingsProfile->Gamma = 0.5f;
+	RealizeDisplayOptions(UserSettingsProfile);
 }
 
 void UDisplayOptionPanel::RealizeDisplayOptions(UUserSettingsProfile* UserSettingsProfile)

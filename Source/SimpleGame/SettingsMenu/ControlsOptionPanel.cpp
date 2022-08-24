@@ -15,6 +15,8 @@ void UControlsOptionPanel::OnControlsApplyButtonClicked()
 
 void UControlsOptionPanel::OnControlsResetButtonClicked()
 {
+	UserSettingsProfile->MouseSensitivity = 0.5f;
+	RealizeControlsOptions(UserSettingsProfile);
 }
 
 void UControlsOptionPanel::RealizeControlsOptions(UUserSettingsProfile* UserSettingsProfile)

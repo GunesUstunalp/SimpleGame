@@ -64,5 +64,5 @@ public:
 	void OnGraphicsResetButtonClicked();
 
 	UFUNCTION(BlueprintCallable)
-	static void RealizeAudioOptions(UUserSettingsProfile* UserSettingsProfile);
+	static void RealizeGraphicsOptions(UUserSettingsProfile* UserSettingsProfile);
 };

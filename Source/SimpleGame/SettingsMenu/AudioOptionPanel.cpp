@@ -36,6 +36,12 @@ void UAudioOptionPanel::OnAudioApplyButtonClicked()
 }
 
 void UAudioOptionPanel::OnAudioResetButtonClicked(){
+	UserSettingsProfile->MasterVolume = 1.0f;
+	UserSettingsProfile->SFXVolume = 1.0f;
+	UserSettingsProfile->AmbianceVolume = 1.0f;
+	UserSettingsProfile->MusicVolume = 1.0f;
+	UserSettingsProfile->VoiceVolume = 1.0f;
+	RealizeAudioOptions(UserSettingsProfile);
 }
 
 void UAudioOptionPanel::RealizeAudioOptions(UUserSettingsProfile* UserSettingsProfile)

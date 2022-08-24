@@ -75,8 +75,10 @@ void UGraphicsOptionPanel::OnGraphicsApplyButtonClicked()
 
 void UGraphicsOptionPanel::OnGraphicsResetButtonClicked()
 {
+	UserSettingsProfile->setQualityPresetIndex(4);
+	RealizeGraphicsOptions(UserSettingsProfile);
 }
 
-void UGraphicsOptionPanel::RealizeAudioOptions(UUserSettingsProfile* UserSettingsProfile)
+void UGraphicsOptionPanel::RealizeGraphicsOptions(UUserSettingsProfile* UserSettingsProfile)
 {
 }

@@ -35,6 +35,12 @@ void UGameplayOptionPanel::OnGameplayApplyButtonClicked()
 
 void UGameplayOptionPanel::OnGameplayResetButtonClicked()
 {
+	UserSettingsProfile->Language = "English";
+	UserSettingsProfile->IsSubtitleEnabled = true;
+	UserSettingsProfile->IsBloodEnabled = true;
+	UserSettingsProfile->IsGoreEnabled = true;
+	UserSettingsProfile->IsInsectsEnabled = true;
+	RealizeGameplayOptions(UserSettingsProfile);
 }
 
 void UGameplayOptionPanel::RealizeGameplayOptions(UUserSettingsProfile* UserSettingsProfile)
