@@ -49,3 +49,7 @@ void UDisplayOptionPanel::OnDisplayApplyButtonClicked()
 void UDisplayOptionPanel::OnDisplayResetButtonClicked()
 {
 }
+
+void UDisplayOptionPanel::RealizeDisplayOptions(UUserSettingsProfile* UserSettingsProfile)
+{
+}

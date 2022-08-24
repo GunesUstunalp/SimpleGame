@@ -35,6 +35,9 @@ void UAudioOptionPanel::OnAudioApplyButtonClicked()
 	UserSettingsProfile->Print();
 }
 
-void UAudioOptionPanel::OnAudioResetButtonClicked()
+void UAudioOptionPanel::OnAudioResetButtonClicked(){
+}
+
+void UAudioOptionPanel::RealizeAudioOptions(UUserSettingsProfile* UserSettingsProfile)
 {
 }

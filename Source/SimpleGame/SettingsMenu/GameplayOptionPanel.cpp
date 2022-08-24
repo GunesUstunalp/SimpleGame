@@ -36,3 +36,7 @@ void UGameplayOptionPanel::OnGameplayApplyButtonClicked()
 void UGameplayOptionPanel::OnGameplayResetButtonClicked()
 {
 }
+
+void UGameplayOptionPanel::RealizeGameplayOptions(UUserSettingsProfile* UserSettingsProfile)
+{
+}

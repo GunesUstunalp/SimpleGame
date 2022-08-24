@@ -9,36 +9,52 @@
 
 void USettingsMenuWidget::SetCurrentOptionsToAllFields()
 {
-	//Set the resolution combo box to the current resolution
-	FString CurrentResolution = FString::FromInt(Settings->GetScreenResolution().X) + "x" + FString::FromInt(Settings->GetScreenResolution().Y);
-	ResolutionComboBox->SetSelectedOption(CurrentResolution);
-	
-	//Sets the window mode combo box to the current window mode
-	FString CurrentWindowMode;
-	if(Settings->GetFullscreenMode() == EWindowMode::Fullscreen)
-		CurrentWindowMode = "Fullscreen";
-	else if(Settings->GetFullscreenMode() == EWindowMode::WindowedFullscreen)
-		CurrentWindowMode = "Borderless";
-	else
-		CurrentWindowMode = "Windowed";
-	WindowModeComboBox->SetSelectedOption(CurrentWindowMode);
-	
-	//Sets the quality combo box to the current quality level
-	int CurrentQualityLevel = Settings->ScalabilityQuality.GetSingleQualityLevel(); //Get the current quality level, -1 if "Custom"
-	if(CurrentQualityLevel == -1)
-		QualityPresetComboBox->SetSelectedOption("Custom");
-	else
+	//Audio Options
+	MasterSlider->SetValue(CurrentSettingsProfile->MasterVolume);
+	SFXSlider->SetValue(CurrentSettingsProfile->SFXVolume);
+	AmbianceSlider->SetValue(CurrentSettingsProfile->AmbianceVolume);
+	MusicSlider->SetValue(CurrentSettingsProfile->MusicVolume);
+	VoiceSlider->SetValue(CurrentSettingsProfile->VoiceVolume);
+	//Display Options
+	switch (CurrentSettingsProfile->WindowMode)
 	{
-		QualityPresetComboBox->SetSelectedIndex(CurrentQualityLevel);
+	case EWindowMode::Fullscreen:
+		WindowModeComboBox->SetSelectedIndex(0);
+		break;
+	case EWindowMode::WindowedFullscreen:
+		WindowModeComboBox->SetSelectedIndex(1);
+		break;
+	case EWindowMode::Windowed:
+		WindowModeComboBox->SetSelectedIndex(2);
+		break;
+	default:
+		UE_LOG(LogTemp, Error, TEXT("ERROR! Unknown WindowMode!!!"));
 	}
-
-	//Sets the V-Sync checkbox to the current V-Sync setting
-	if(Settings->IsVSyncEnabled())
-		VSyncCheckBox->SetCheckedState(ECheckBoxState::Checked);
-	else
-		VSyncCheckBox->SetCheckedState(ECheckBoxState::Unchecked);
-	
-	//PostProcessing
+	ResolutionComboBox->SetSelectedOption(CurrentSettingsProfile->Resolution);
+	VSyncCheckBox->SetCheckedState(CurrentSettingsProfile->VSyncEnabled ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
+	BrightnessSlider->SetValue(CurrentSettingsProfile->Brightness);
+	GammaSlider->SetValue(CurrentSettingsProfile->Gamma);
+	//Gameplay Options
+	LanguageComboBox->SetSelectedOption(CurrentSettingsProfile->Language);
+	SubtitlesCheckBox->SetCheckedState(CurrentSettingsProfile->IsSubtitleEnabled ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
+	BloodCheckBox->SetCheckedState(CurrentSettingsProfile->IsBloodEnabled ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
+	GoreCheckBox->SetCheckedState(CurrentSettingsProfile->IsGoreEnabled ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
+	InsectsCheckBox->SetCheckedState(CurrentSettingsProfile->IsInsectsEnabled ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
+	//Controls Options
+	MouseSensitivitySlider->SetValue(CurrentSettingsProfile->MouseSensitivity);
+	//Graphics Options
+	QualityPresetComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->QualityPreset);
+	ResolutionQualityComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->ResolutionQuality);
+	ViewDistanceComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->ViewDistanceQuality);
+	AntiAliasingComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->AntiAliasingQuality);
+	ShadowQualityComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->ShadowQuality);
+	GlobalIlluminationQualityComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->GlobalIlluminationQuality);
+	ReflectionQualityComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->ReflectionQuality);
+	PostProcessQualityComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->PostProcessQuality);
+	TextureQualityComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->TextureQuality);
+	EffectsQualityComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->EffectsQuality);
+	FoliageQualityComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->FoliageQuality);
+	ShadingQualityComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->ShadingQuality);
 }
 
 void USettingsMenuWidget::SetActionFunctionsForInputs()

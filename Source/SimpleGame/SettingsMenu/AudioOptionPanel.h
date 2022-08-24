@@ -41,4 +41,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void OnAudioResetButtonClicked();
+
+	UFUNCTION(BlueprintCallable)
+	void RealizeAudioOptions(UUserSettingsProfile* UserSettingsProfile);
 };

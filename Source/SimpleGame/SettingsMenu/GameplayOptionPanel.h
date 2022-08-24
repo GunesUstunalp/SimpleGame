@@ -38,4 +38,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void OnGameplayResetButtonClicked();
+
+	UFUNCTION(BlueprintCallable)
+	void RealizeGameplayOptions(UUserSettingsProfile* UserSettingsProfile);
 };

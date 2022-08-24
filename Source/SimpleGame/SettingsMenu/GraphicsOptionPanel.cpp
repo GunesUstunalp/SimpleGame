@@ -5,7 +5,7 @@
 
 void UGraphicsOptionPanel::OnQualityPresetComboBoxSelectionChanged(int SelectedIndex)
 {
-	UserSettingsProfile->QualityPresetIndex = 4 - SelectedIndex;
+	UserSettingsProfile->QualityPreset = 4 - SelectedIndex;
 }
 
 void UGraphicsOptionPanel::OnGraphicsAutoDetectButtonClicked()
@@ -74,5 +74,9 @@ void UGraphicsOptionPanel::OnGraphicsApplyButtonClicked()
 }
 
 void UGraphicsOptionPanel::OnGraphicsResetButtonClicked()
+{
+}
+
+void UGraphicsOptionPanel::RealizeAudioOptions(UUserSettingsProfile* UserSettingsProfile)
 {
 }

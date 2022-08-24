@@ -28,7 +28,7 @@ public:
 	float Brightness;
 	
 	//Graphics Options
-	int QualityPresetIndex;
+	int QualityPreset;
 	int ResolutionQuality;
 	int ViewDistanceQuality;
 	int AntiAliasingQuality;

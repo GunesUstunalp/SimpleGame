@@ -16,3 +16,7 @@ void UControlsOptionPanel::OnControlsApplyButtonClicked()
 void UControlsOptionPanel::OnControlsResetButtonClicked()
 {
 }
+
+void UControlsOptionPanel::RealizeControlsOptions(UUserSettingsProfile* UserSettingsProfile)
+{
+}

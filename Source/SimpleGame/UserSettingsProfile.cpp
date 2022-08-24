@@ -8,7 +8,7 @@ UUserSettingsProfile::UUserSettingsProfile()
 	VSyncEnabled = true;
 	WindowMode = EWindowMode::Windowed;
 	Resolution = "1280x720";
-	Gamma = 2.2f;
+	Gamma = 0.5f;
 	Brightness = 0.5f; //?
 
 	setQualityPresetIndex(4);
@@ -36,7 +36,7 @@ UUserSettingsProfile::UUserSettingsProfile(UUserSettingsProfile& Other)
 	Gamma = Other.Gamma;
 	Brightness = Other.Brightness;
 	
-	QualityPresetIndex = Other.QualityPresetIndex;
+	QualityPreset = Other.QualityPreset;
 	ResolutionQuality = Other.ResolutionQuality;
 	ViewDistanceQuality = Other.ViewDistanceQuality;
 	AntiAliasingQuality = Other.AntiAliasingQuality;
@@ -69,7 +69,7 @@ bool UUserSettingsProfile::operator==(const UUserSettingsProfile& Other) const
 	if(VSyncEnabled != Other.VSyncEnabled || WindowMode != Other.WindowMode || Resolution != Other.Resolution || Gamma != Other.Gamma || Brightness != Other.Brightness)
 		return false;
 
-	if(QualityPresetIndex != Other.QualityPresetIndex || ResolutionQuality != Other.ResolutionQuality || ViewDistanceQuality != Other.ViewDistanceQuality || AntiAliasingQuality != Other.AntiAliasingQuality || ShadowQuality != Other.ShadowQuality || GlobalIlluminationQuality != Other.GlobalIlluminationQuality || ReflectionQuality != Other.ReflectionQuality || PostProcessQuality != Other.PostProcessQuality || TextureQuality != Other.TextureQuality || EffectsQuality != Other.EffectsQuality || FoliageQuality != Other.FoliageQuality || ShadingQuality != Other.ShadingQuality)
+	if(QualityPreset != Other.QualityPreset || ResolutionQuality != Other.ResolutionQuality || ViewDistanceQuality != Other.ViewDistanceQuality || AntiAliasingQuality != Other.AntiAliasingQuality || ShadowQuality != Other.ShadowQuality || GlobalIlluminationQuality != Other.GlobalIlluminationQuality || ReflectionQuality != Other.ReflectionQuality || PostProcessQuality != Other.PostProcessQuality || TextureQuality != Other.TextureQuality || EffectsQuality != Other.EffectsQuality || FoliageQuality != Other.FoliageQuality || ShadingQuality != Other.ShadingQuality)
 		return false;
 
 	if(MasterVolume != Other.MasterVolume || MusicVolume != Other.MusicVolume || SFXVolume != Other.SFXVolume || VoiceVolume != Other.VoiceVolume || AmbianceVolume != Other.AmbianceVolume)
@@ -87,8 +87,8 @@ bool UUserSettingsProfile::operator==(const UUserSettingsProfile& Other) const
 
 void UUserSettingsProfile::setQualityPresetIndex(int Index)
 {
-	QualityPresetIndex = Index;
-	if(QualityPresetIndex != -1) //Custom -> -1
+	QualityPreset = Index;
+	if(QualityPreset != -1) //Custom -> -1
 	{
 		ResolutionQuality = Index;
 		ViewDistanceQuality = Index;
@@ -112,7 +112,7 @@ void UUserSettingsProfile::Print()
 	UE_LOG(LogTemp, Warning, TEXT("Resolution: %s"), *Resolution);
 	UE_LOG(LogTemp, Warning, TEXT("Gamma: %f"), Gamma);
 	UE_LOG(LogTemp, Warning, TEXT("Brightness: %f"), Brightness);
-	UE_LOG(LogTemp, Warning, TEXT("QualityPresetIndex: %d"), QualityPresetIndex);
+	UE_LOG(LogTemp, Warning, TEXT("QualityPresetIndex: %d"), QualityPreset);
 	UE_LOG(LogTemp, Warning, TEXT("ResolutionQuality: %d"), ResolutionQuality);
 	UE_LOG(LogTemp, Warning, TEXT("ViewDistanceQuality: %d"), ViewDistanceQuality);
 	UE_LOG(LogTemp, Warning, TEXT("AntiAliasingQuality: %d"), AntiAliasingQuality);
