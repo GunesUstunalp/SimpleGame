@@ -28,5 +28,5 @@ public:
 	void OnControlsResetButtonClicked();
 
 	UFUNCTION(BlueprintCallable)
-	void RealizeControlsOptions(UUserSettingsProfile* UserSettingsProfile);
+	static void RealizeControlsOptions(UUserSettingsProfile* UserSettingsProfile);
 };

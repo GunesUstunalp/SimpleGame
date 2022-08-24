@@ -40,5 +40,5 @@ public:
 	void OnGameplayResetButtonClicked();
 
 	UFUNCTION(BlueprintCallable)
-	void RealizeGameplayOptions(UUserSettingsProfile* UserSettingsProfile);
+	static void RealizeGameplayOptions(UUserSettingsProfile* UserSettingsProfile);
 };

@@ -40,5 +40,5 @@ public:
 	void OnDisplayResetButtonClicked();
 
 	UFUNCTION(BlueprintCallable)
-	void RealizeDisplayOptions(UUserSettingsProfile* UserSettingsProfile);
+	static void RealizeDisplayOptions(UUserSettingsProfile* UserSettingsProfile);
 };
