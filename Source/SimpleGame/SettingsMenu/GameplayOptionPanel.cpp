@@ -3,6 +3,8 @@
 
 #include "GameplayOptionPanel.h"
 
+#include "Kismet/GameplayStatics.h"
+
 void UGameplayOptionPanel::OnLanguageComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType)
 {
 	CurrentSettingsProfile->Language = Selection;
@@ -31,6 +33,8 @@ void UGameplayOptionPanel::OnInsectsCheckBoxSelectionChanged(bool Selection)
 void UGameplayOptionPanel::OnGameplayApplyButtonClicked()
 {
 	CurrentSettingsProfile->Print();
+	SavedSettingsProfile->SetFromOther(CurrentSettingsProfile);
+	UGameplayStatics::SaveGameToSlot(SavedSettingsProfile, "SettingsProfile", 0);
 }
 
 void UGameplayOptionPanel::OnGameplayResetButtonClicked()

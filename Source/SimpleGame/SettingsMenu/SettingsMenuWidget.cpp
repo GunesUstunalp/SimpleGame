@@ -16,20 +16,14 @@ void USettingsMenuWidget::SetCurrentOptionsToAllFields()
 	MusicSlider->SetValue(CurrentSettingsProfile->MusicVolume);
 	VoiceSlider->SetValue(CurrentSettingsProfile->VoiceVolume);
 	//Display Options
-	switch (CurrentSettingsProfile->WindowMode)
-	{
-	case EWindowMode::Fullscreen:
+	if(CurrentSettingsProfile->WindowMode == "Fullscreen")
 		WindowModeComboBox->SetSelectedIndex(0);
-		break;
-	case EWindowMode::WindowedFullscreen:
+	else if(CurrentSettingsProfile->WindowMode == "WindowedFullscreen")
 		WindowModeComboBox->SetSelectedIndex(1);
-		break;
-	case EWindowMode::Windowed:
+	else if(CurrentSettingsProfile->WindowMode == "Windowed")
 		WindowModeComboBox->SetSelectedIndex(2);
-		break;
-	default:
+	else
 		UE_LOG(LogTemp, Error, TEXT("ERROR! Unknown WindowMode!!!"));
-	}
 	ResolutionComboBox->SetSelectedOption(CurrentSettingsProfile->Resolution);
 	VSyncCheckBox->SetCheckedState(CurrentSettingsProfile->VSyncEnabled ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
 	BrightnessSlider->SetValue(CurrentSettingsProfile->Brightness);
@@ -55,6 +49,22 @@ void USettingsMenuWidget::SetCurrentOptionsToAllFields()
 	EffectsQualityComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->EffectsQuality);
 	FoliageQualityComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->FoliageQuality);
 	ShadingQualityComboBox->SetSelectedIndex(4 - CurrentSettingsProfile->ShadingQuality);
+
+	//Disable Advanced Graphics Options if not custom
+	if(CurrentSettingsProfile->QualityPreset != -1)
+	{
+		ResolutionQualityComboBox->SetIsEnabled(false);
+		ViewDistanceComboBox->SetIsEnabled(false);
+		AntiAliasingComboBox->SetIsEnabled(false);
+		ShadowQualityComboBox->SetIsEnabled(false);
+		GlobalIlluminationQualityComboBox->SetIsEnabled(false);
+		ReflectionQualityComboBox->SetIsEnabled(false);
+		PostProcessQualityComboBox->SetIsEnabled(false);
+		TextureQualityComboBox->SetIsEnabled(false);
+		EffectsQualityComboBox->SetIsEnabled(false);
+		FoliageQualityComboBox->SetIsEnabled(false);
+		ShadingQualityComboBox->SetIsEnabled(false);
+	}
 }
 
 void USettingsMenuWidget::SetActionFunctionsForInputs()
@@ -123,24 +133,32 @@ void USettingsMenuWidget::SetUserSettingsProfilePointersForOptionPanels()
 	GameplayOptionPanel->CurrentSettingsProfile = CurrentSettingsProfile;
 	ControlsOptionPanel->CurrentSettingsProfile = CurrentSettingsProfile;
 	GraphicsOptionPanel->CurrentSettingsProfile = CurrentSettingsProfile;
+
+	AudioOptionPanel->SavedSettingsProfile = SavedSettingsProfile;
+	DisplayOptionPanel->SavedSettingsProfile = SavedSettingsProfile;
+	GameplayOptionPanel->SavedSettingsProfile = SavedSettingsProfile;
+	ControlsOptionPanel->SavedSettingsProfile = SavedSettingsProfile;
+	GraphicsOptionPanel->SavedSettingsProfile = SavedSettingsProfile;
 }
 
 void USettingsMenuWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 	Settings = GEngine->GetGameUserSettings();
+	
 	if(UGameplayStatics::DoesSaveGameExist("SettingsProfile", 0))
 	{
 		SavedSettingsProfile = Cast<UUserSettingsProfile>(UGameplayStatics::LoadGameFromSlot("SettingsProfile", 0));
+		CurrentSettingsProfile = Cast<UUserSettingsProfile>(UGameplayStatics::LoadGameFromSlot("SettingsProfile", 0));
+		SavedSettingsProfile->Print();
+		UE_LOG(LogTemp, Warning, TEXT("SavedSettingsProfile is found"));
 	}
 	else
 	{
-		SavedSettingsProfile = NewObject<UUserSettingsProfile>();
+		SavedSettingsProfile = Cast<UUserSettingsProfile>(UGameplayStatics::CreateSaveGameObject(UUserSettingsProfile::StaticClass()));
+		CurrentSettingsProfile = Cast<UUserSettingsProfile>(UGameplayStatics::CreateSaveGameObject(UUserSettingsProfile::StaticClass()));
+		UE_LOG(LogTemp, Warning, TEXT("SavedSettingsProfile is null"));
 	}
-    
-	CurrentSettingsProfile = NewObject<UUserSettingsProfile>();
-	CurrentSettingsProfile->SetFromOther(*SavedSettingsProfile);
-	
 
 	OnAudioOptionButtonClicked(); // Show the audio panel by default
 	SetCurrentOptionsToAllFields();
@@ -242,9 +260,6 @@ void USettingsMenuWidget::ResetSettings()
 	GetOwningPlayer()->ConsoleCommand("gamma " + FString::SanitizeFloat(2.2f));
 	//TODO: Reset the settings to the default values
 }
-
-
-
 
 void USettingsMenuWidget::OnAudioOptionButtonClicked()
 {

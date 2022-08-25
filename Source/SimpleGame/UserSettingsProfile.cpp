@@ -6,7 +6,7 @@
 UUserSettingsProfile::UUserSettingsProfile()
 {
 	VSyncEnabled = true;
-	WindowMode = EWindowMode::Windowed;
+	WindowMode = "Windowed";
 	Resolution = "1280x720";
 	Gamma = 0.5f;
 	Brightness = 0.5f; //?
@@ -104,47 +104,47 @@ void UUserSettingsProfile::SetQualityPresetIndex(int Index)
 	}
 }
 
-void UUserSettingsProfile::SetFromOther(UUserSettingsProfile& Other)
+void UUserSettingsProfile::SetFromOther(UUserSettingsProfile* Other)
 {
-	VSyncEnabled = Other.VSyncEnabled;
-	WindowMode = Other.WindowMode;
-	Resolution = Other.Resolution;
-	Gamma = Other.Gamma;
-	Brightness = Other.Brightness;
+	VSyncEnabled = Other->VSyncEnabled;
+	WindowMode = Other->WindowMode;
+	Resolution = Other->Resolution;
+	Gamma = Other->Gamma;
+	Brightness = Other->Brightness;
 	
-	QualityPreset = Other.QualityPreset;
-	ResolutionQuality = Other.ResolutionQuality;
-	ViewDistanceQuality = Other.ViewDistanceQuality;
-	AntiAliasingQuality = Other.AntiAliasingQuality;
-	ShadowQuality = Other.ShadowQuality;
-	GlobalIlluminationQuality = Other.GlobalIlluminationQuality;
-	ReflectionQuality = Other.ReflectionQuality;
-	PostProcessQuality = Other.PostProcessQuality;
-	TextureQuality = Other.TextureQuality;
-	EffectsQuality = Other.EffectsQuality;
-	FoliageQuality = Other.FoliageQuality;
-	ShadingQuality = Other.ShadingQuality;
+	QualityPreset = Other->QualityPreset;
+	ResolutionQuality = Other->ResolutionQuality;
+	ViewDistanceQuality = Other->ViewDistanceQuality;
+	AntiAliasingQuality = Other->AntiAliasingQuality;
+	ShadowQuality = Other->ShadowQuality;
+	GlobalIlluminationQuality = Other->GlobalIlluminationQuality;
+	ReflectionQuality = Other->ReflectionQuality;
+	PostProcessQuality = Other->PostProcessQuality;
+	TextureQuality = Other->TextureQuality;
+	EffectsQuality = Other->EffectsQuality;
+	FoliageQuality = Other->FoliageQuality;
+	ShadingQuality = Other->ShadingQuality;
 
-	MasterVolume = Other.MasterVolume;
-	MusicVolume = Other.MusicVolume;
-	SFXVolume = Other.SFXVolume;
-	VoiceVolume = Other.VoiceVolume;
-	AmbianceVolume = Other.AmbianceVolume;
+	MasterVolume = Other->MasterVolume;
+	MusicVolume = Other->MusicVolume;
+	SFXVolume = Other->SFXVolume;
+	VoiceVolume = Other->VoiceVolume;
+	AmbianceVolume = Other->AmbianceVolume;
 
-	IsBloodEnabled = Other.IsBloodEnabled;
-	IsGoreEnabled = Other.IsGoreEnabled;
-	IsInsectsEnabled = Other.IsInsectsEnabled;
-	Language = Other.Language;
-	IsSubtitleEnabled = Other.IsSubtitleEnabled;
+	IsBloodEnabled = Other->IsBloodEnabled;
+	IsGoreEnabled = Other->IsGoreEnabled;
+	IsInsectsEnabled = Other->IsInsectsEnabled;
+	Language = Other->Language;
+	IsSubtitleEnabled = Other->IsSubtitleEnabled;
 	
-	MouseSensitivity = Other.MouseSensitivity;
+	MouseSensitivity = Other->MouseSensitivity;
 }
 
 void UUserSettingsProfile::Print()
 {
 	UE_LOG(LogTemp, Warning, TEXT("SettingsProfile: "));
 	UE_LOG(LogTemp, Warning, TEXT("VSync: %d"), VSyncEnabled);
-	UE_LOG(LogTemp, Warning, TEXT("WindowMode: %d"), WindowMode);
+	UE_LOG(LogTemp, Warning, TEXT("WindowMode: %s"), *WindowMode);
 	UE_LOG(LogTemp, Warning, TEXT("Resolution: %s"), *Resolution);
 	UE_LOG(LogTemp, Warning, TEXT("Gamma: %f"), Gamma);
 	UE_LOG(LogTemp, Warning, TEXT("Brightness: %f"), Brightness);

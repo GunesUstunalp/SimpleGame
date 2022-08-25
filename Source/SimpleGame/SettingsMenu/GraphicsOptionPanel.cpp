@@ -3,9 +3,11 @@
 
 #include "GraphicsOptionPanel.h"
 
+#include "Kismet/GameplayStatics.h"
+
 void UGraphicsOptionPanel::OnQualityPresetComboBoxSelectionChanged(int SelectedIndex)
 {
-	CurrentSettingsProfile->QualityPreset = 4 - SelectedIndex;
+	CurrentSettingsProfile->SetQualityPresetIndex(4 - SelectedIndex);
 }
 
 void UGraphicsOptionPanel::OnGraphicsAutoDetectButtonClicked()
@@ -71,6 +73,8 @@ void UGraphicsOptionPanel::OnShadingQualityComboBoxSelectionChanged(int Selected
 void UGraphicsOptionPanel::OnGraphicsApplyButtonClicked()
 {
 	CurrentSettingsProfile->Print();
+	SavedSettingsProfile->SetFromOther(CurrentSettingsProfile);
+	UGameplayStatics::SaveGameToSlot(SavedSettingsProfile, "SettingsProfile", 0);
 }
 
 void UGraphicsOptionPanel::OnGraphicsResetButtonClicked()
@@ -81,4 +85,5 @@ void UGraphicsOptionPanel::OnGraphicsResetButtonClicked()
 
 void UGraphicsOptionPanel::RealizeGraphicsOptions(UUserSettingsProfile* UserSettingsProfile)
 {
+	
 }

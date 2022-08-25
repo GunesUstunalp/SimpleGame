@@ -3,18 +3,20 @@
 
 #include "DisplayOptionPanel.h"
 
+#include "Kismet/GameplayStatics.h"
+
 void UDisplayOptionPanel::OnWindowModeComboBoxSelectionChanged(int SelectedIndex)
 {
 	switch (SelectedIndex)
 	{
 	case 0:
-		CurrentSettingsProfile->WindowMode = EWindowMode::Fullscreen;
+		CurrentSettingsProfile->WindowMode = "Fullscreen";
 		break;
 	case 1:
-		CurrentSettingsProfile->WindowMode = EWindowMode::WindowedFullscreen;
+		CurrentSettingsProfile->WindowMode = "WindowedFullscreen";
 		break;
 	case 2:
-		CurrentSettingsProfile->WindowMode = EWindowMode::Windowed;
+		CurrentSettingsProfile->WindowMode = "Windowed";
 		break;
 	default:
 		UE_LOG(LogTemp, Error, TEXT("ERROR! Unknown WindowMode!!!"));
@@ -44,11 +46,13 @@ void UDisplayOptionPanel::OnGammaSliderValueChanged(float Value)
 void UDisplayOptionPanel::OnDisplayApplyButtonClicked()
 {
 	CurrentSettingsProfile->Print();
+	SavedSettingsProfile->SetFromOther(CurrentSettingsProfile);
+	UGameplayStatics::SaveGameToSlot(SavedSettingsProfile, "SettingsProfile", 0);
 }
 
 void UDisplayOptionPanel::OnDisplayResetButtonClicked()
 {
-	CurrentSettingsProfile->WindowMode = EWindowMode::Windowed;
+	CurrentSettingsProfile->WindowMode = "Windowed";
 	CurrentSettingsProfile->Resolution = "1280x720";
 	CurrentSettingsProfile->VSyncEnabled = true;
 	CurrentSettingsProfile->Brightness = 0.5f;

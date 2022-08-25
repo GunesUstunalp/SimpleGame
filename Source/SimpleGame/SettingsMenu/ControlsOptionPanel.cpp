@@ -3,6 +3,8 @@
 
 #include "ControlsOptionPanel.h"
 
+#include "Kismet/GameplayStatics.h"
+
 void UControlsOptionPanel::OnMouseSensitivitySliderValueChanged(float Value)
 {
 	CurrentSettingsProfile->MouseSensitivity = Value;
@@ -11,6 +13,8 @@ void UControlsOptionPanel::OnMouseSensitivitySliderValueChanged(float Value)
 void UControlsOptionPanel::OnControlsApplyButtonClicked()
 {
 	CurrentSettingsProfile->Print();
+	SavedSettingsProfile->SetFromOther(CurrentSettingsProfile);
+	UGameplayStatics::SaveGameToSlot(SavedSettingsProfile, "SettingsProfile", 0);
 }
 
 void UControlsOptionPanel::OnControlsResetButtonClicked()

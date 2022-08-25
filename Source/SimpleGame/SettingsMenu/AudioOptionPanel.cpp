@@ -4,6 +4,7 @@
 #include "AudioOptionPanel.h"
 
 #include "GameFramework/GameUserSettings.h"
+#include "Kismet/GameplayStatics.h"
 
 void UAudioOptionPanel::OnMasterSliderValueChanged(float Value)
 {
@@ -32,7 +33,8 @@ void UAudioOptionPanel::OnVoiceSliderValueChanged(float Value)
 
 void UAudioOptionPanel::OnAudioApplyButtonClicked()
 {
-	CurrentSettingsProfile->Print();
+	SavedSettingsProfile->SetFromOther(CurrentSettingsProfile);
+	UGameplayStatics::SaveGameToSlot(SavedSettingsProfile, "SettingsProfile", 0);
 }
 
 void UAudioOptionPanel::OnAudioResetButtonClicked(){
@@ -46,4 +48,6 @@ void UAudioOptionPanel::OnAudioResetButtonClicked(){
 
 void UAudioOptionPanel::RealizeAudioOptions(UUserSettingsProfile* UserSettingsProfile)
 {
+	//TODO: Implement Audio Settings
+	
 }
