@@ -118,19 +118,29 @@ void USettingsMenuWidget::SetActionFunctionsForInputs()
 
 void USettingsMenuWidget::SetUserSettingsProfilePointersForOptionPanels()
 {
-	AudioOptionPanel->UserSettingsProfile = CurrentSettingsProfile;
-	DisplayOptionPanel->UserSettingsProfile = CurrentSettingsProfile;
-	GameplayOptionPanel->UserSettingsProfile = CurrentSettingsProfile;
-	ControlsOptionPanel->UserSettingsProfile = CurrentSettingsProfile;
-	GraphicsOptionPanel->UserSettingsProfile = CurrentSettingsProfile;
+	AudioOptionPanel->CurrentSettingsProfile = CurrentSettingsProfile;
+	DisplayOptionPanel->CurrentSettingsProfile = CurrentSettingsProfile;
+	GameplayOptionPanel->CurrentSettingsProfile = CurrentSettingsProfile;
+	ControlsOptionPanel->CurrentSettingsProfile = CurrentSettingsProfile;
+	GraphicsOptionPanel->CurrentSettingsProfile = CurrentSettingsProfile;
 }
 
 void USettingsMenuWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 	Settings = GEngine->GetGameUserSettings();
-
+	if(UGameplayStatics::DoesSaveGameExist("SettingsProfile", 0))
+	{
+		SavedSettingsProfile = Cast<UUserSettingsProfile>(UGameplayStatics::LoadGameFromSlot("SettingsProfile", 0));
+	}
+	else
+	{
+		SavedSettingsProfile = NewObject<UUserSettingsProfile>();
+	}
+    
 	CurrentSettingsProfile = NewObject<UUserSettingsProfile>();
+	CurrentSettingsProfile->SetFromOther(*SavedSettingsProfile);
+	
 
 	OnAudioOptionButtonClicked(); // Show the audio panel by default
 	SetCurrentOptionsToAllFields();

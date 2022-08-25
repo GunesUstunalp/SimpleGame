@@ -19,7 +19,8 @@ class SIMPLEGAME_API UAudioOptionPanel : public UCanvasPanel
 
 public:
 	// UPROPERTY()
-	UUserSettingsProfile* UserSettingsProfile; // Reference to the user settings profile, to be used to change it inside the input functions
+	UUserSettingsProfile* CurrentSettingsProfile; // Reference to the user settings profile, to be used to change it inside the input functions
+	UUserSettingsProfile* SavedSettingsProfile;
 	
 	UFUNCTION(BlueprintCallable)
 	void OnMasterSliderValueChanged(float Value);

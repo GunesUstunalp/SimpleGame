@@ -29,6 +29,8 @@ class SIMPLEGAME_API USettingsMenuWidget : public UUserWidget
 public:
 	UPROPERTY()
 	UUserSettingsProfile* CurrentSettingsProfile;
+	UPROPERTY()
+	UUserSettingsProfile* SavedSettingsProfile;
 	
 	UFUNCTION()
 	void NativeConstruct() override; //constructor for the class

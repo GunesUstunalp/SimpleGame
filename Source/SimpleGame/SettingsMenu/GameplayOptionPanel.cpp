@@ -5,42 +5,42 @@
 
 void UGameplayOptionPanel::OnLanguageComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType)
 {
-	UserSettingsProfile->Language = Selection;
+	CurrentSettingsProfile->Language = Selection;
 }
 
 void UGameplayOptionPanel::OnSubtitlesCheckBoxSelectionChanged(bool Selection)
 {
-	UserSettingsProfile->IsSubtitleEnabled = Selection;
+	CurrentSettingsProfile->IsSubtitleEnabled = Selection;
 }
 
 void UGameplayOptionPanel::OnBloodCheckBoxSelectionChanged(bool Selection)
 {
-	UserSettingsProfile->IsBloodEnabled = Selection;
+	CurrentSettingsProfile->IsBloodEnabled = Selection;
 }
 
 void UGameplayOptionPanel::OnGoreCheckBoxSelectionChanged(bool Selection)
 {
-	UserSettingsProfile->IsGoreEnabled = Selection;
+	CurrentSettingsProfile->IsGoreEnabled = Selection;
 }
 
 void UGameplayOptionPanel::OnInsectsCheckBoxSelectionChanged(bool Selection)
 {
-	UserSettingsProfile->IsInsectsEnabled = Selection;
+	CurrentSettingsProfile->IsInsectsEnabled = Selection;
 }
 
 void UGameplayOptionPanel::OnGameplayApplyButtonClicked()
 {
-	UserSettingsProfile->Print();
+	CurrentSettingsProfile->Print();
 }
 
 void UGameplayOptionPanel::OnGameplayResetButtonClicked()
 {
-	UserSettingsProfile->Language = "English";
-	UserSettingsProfile->IsSubtitleEnabled = true;
-	UserSettingsProfile->IsBloodEnabled = true;
-	UserSettingsProfile->IsGoreEnabled = true;
-	UserSettingsProfile->IsInsectsEnabled = true;
-	RealizeGameplayOptions(UserSettingsProfile);
+	CurrentSettingsProfile->Language = "English";
+	CurrentSettingsProfile->IsSubtitleEnabled = true;
+	CurrentSettingsProfile->IsBloodEnabled = true;
+	CurrentSettingsProfile->IsGoreEnabled = true;
+	CurrentSettingsProfile->IsInsectsEnabled = true;
+	RealizeGameplayOptions(CurrentSettingsProfile);
 }
 
 void UGameplayOptionPanel::RealizeGameplayOptions(UUserSettingsProfile* UserSettingsProfile)

@@ -16,7 +16,8 @@ class SIMPLEGAME_API UGameplayOptionPanel : public UCanvasPanel
 	GENERATED_BODY()
 public:
 	// UPROPERTY()
-	UUserSettingsProfile* UserSettingsProfile; // Reference to the user settings profile, to be used to change it inside the input functions
+	UUserSettingsProfile* CurrentSettingsProfile; // Reference to the user settings profile, to be used to change it inside the input functions
+	UUserSettingsProfile* SavedSettingsProfile;
 
 	UFUNCTION(BlueprintCallable)
 	void OnLanguageComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType);

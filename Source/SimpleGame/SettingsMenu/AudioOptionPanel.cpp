@@ -7,41 +7,41 @@
 
 void UAudioOptionPanel::OnMasterSliderValueChanged(float Value)
 {
-	UserSettingsProfile->MasterVolume = Value;
+	CurrentSettingsProfile->MasterVolume = Value;
 }
 
 void UAudioOptionPanel::OnSFXSliderValueChanged(float Value)
 {
-	UserSettingsProfile->SFXVolume = Value;
+	CurrentSettingsProfile->SFXVolume = Value;
 }
 
 void UAudioOptionPanel::OnAmbianceSliderValueChanged(float Value)
 {
-	UserSettingsProfile->AmbianceVolume = Value;
+	CurrentSettingsProfile->AmbianceVolume = Value;
 }
 
 void UAudioOptionPanel::OnMusicSliderValueChanged(float Value)
 {
-	UserSettingsProfile->MusicVolume = Value;
+	CurrentSettingsProfile->MusicVolume = Value;
 }
 
 void UAudioOptionPanel::OnVoiceSliderValueChanged(float Value)
 {
-	UserSettingsProfile->VoiceVolume = Value;
+	CurrentSettingsProfile->VoiceVolume = Value;
 }
 
 void UAudioOptionPanel::OnAudioApplyButtonClicked()
 {
-	UserSettingsProfile->Print();
+	CurrentSettingsProfile->Print();
 }
 
 void UAudioOptionPanel::OnAudioResetButtonClicked(){
-	UserSettingsProfile->MasterVolume = 1.0f;
-	UserSettingsProfile->SFXVolume = 1.0f;
-	UserSettingsProfile->AmbianceVolume = 1.0f;
-	UserSettingsProfile->MusicVolume = 1.0f;
-	UserSettingsProfile->VoiceVolume = 1.0f;
-	RealizeAudioOptions(UserSettingsProfile);
+	CurrentSettingsProfile->MasterVolume = 1.0f;
+	CurrentSettingsProfile->SFXVolume = 1.0f;
+	CurrentSettingsProfile->AmbianceVolume = 1.0f;
+	CurrentSettingsProfile->MusicVolume = 1.0f;
+	CurrentSettingsProfile->VoiceVolume = 1.0f;
+	RealizeAudioOptions(CurrentSettingsProfile);
 }
 
 void UAudioOptionPanel::RealizeAudioOptions(UUserSettingsProfile* UserSettingsProfile)

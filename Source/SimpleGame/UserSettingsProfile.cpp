@@ -11,7 +11,7 @@ UUserSettingsProfile::UUserSettingsProfile()
 	Gamma = 0.5f;
 	Brightness = 0.5f; //?
 
-	setQualityPresetIndex(4);
+	SetQualityPresetIndex(4);
 	
 	MasterVolume = 1.0f;
 	MusicVolume = 1.0f;
@@ -85,7 +85,7 @@ bool UUserSettingsProfile::operator==(const UUserSettingsProfile& Other) const
 }
 
 
-void UUserSettingsProfile::setQualityPresetIndex(int Index)
+void UUserSettingsProfile::SetQualityPresetIndex(int Index)
 {
 	QualityPreset = Index;
 	if(QualityPreset != -1) //Custom -> -1
@@ -102,6 +102,42 @@ void UUserSettingsProfile::setQualityPresetIndex(int Index)
 		FoliageQuality = Index;
 		ShadingQuality = Index;
 	}
+}
+
+void UUserSettingsProfile::SetFromOther(UUserSettingsProfile& Other)
+{
+	VSyncEnabled = Other.VSyncEnabled;
+	WindowMode = Other.WindowMode;
+	Resolution = Other.Resolution;
+	Gamma = Other.Gamma;
+	Brightness = Other.Brightness;
+	
+	QualityPreset = Other.QualityPreset;
+	ResolutionQuality = Other.ResolutionQuality;
+	ViewDistanceQuality = Other.ViewDistanceQuality;
+	AntiAliasingQuality = Other.AntiAliasingQuality;
+	ShadowQuality = Other.ShadowQuality;
+	GlobalIlluminationQuality = Other.GlobalIlluminationQuality;
+	ReflectionQuality = Other.ReflectionQuality;
+	PostProcessQuality = Other.PostProcessQuality;
+	TextureQuality = Other.TextureQuality;
+	EffectsQuality = Other.EffectsQuality;
+	FoliageQuality = Other.FoliageQuality;
+	ShadingQuality = Other.ShadingQuality;
+
+	MasterVolume = Other.MasterVolume;
+	MusicVolume = Other.MusicVolume;
+	SFXVolume = Other.SFXVolume;
+	VoiceVolume = Other.VoiceVolume;
+	AmbianceVolume = Other.AmbianceVolume;
+
+	IsBloodEnabled = Other.IsBloodEnabled;
+	IsGoreEnabled = Other.IsGoreEnabled;
+	IsInsectsEnabled = Other.IsInsectsEnabled;
+	Language = Other.Language;
+	IsSubtitleEnabled = Other.IsSubtitleEnabled;
+	
+	MouseSensitivity = Other.MouseSensitivity;
 }
 
 void UUserSettingsProfile::Print()

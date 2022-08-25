@@ -59,5 +59,6 @@ public:
 	float MouseSensitivity;
 
 	void Print(); // Prints the settings to the console
-	void setQualityPresetIndex(int Index); // Set the quality preset index and sets all the quality indexes to the preset index
+	void SetQualityPresetIndex(int Index); // Set the quality preset index and sets all the quality indexes to the preset index
+	void SetFromOther(UUserSettingsProfile &Other); // Set the settings from another profile
 };

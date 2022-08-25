@@ -8,13 +8,13 @@ void UDisplayOptionPanel::OnWindowModeComboBoxSelectionChanged(int SelectedIndex
 	switch (SelectedIndex)
 	{
 	case 0:
-		UserSettingsProfile->WindowMode = EWindowMode::Fullscreen;
+		CurrentSettingsProfile->WindowMode = EWindowMode::Fullscreen;
 		break;
 	case 1:
-		UserSettingsProfile->WindowMode = EWindowMode::WindowedFullscreen;
+		CurrentSettingsProfile->WindowMode = EWindowMode::WindowedFullscreen;
 		break;
 	case 2:
-		UserSettingsProfile->WindowMode = EWindowMode::Windowed;
+		CurrentSettingsProfile->WindowMode = EWindowMode::Windowed;
 		break;
 	default:
 		UE_LOG(LogTemp, Error, TEXT("ERROR! Unknown WindowMode!!!"));
@@ -23,37 +23,37 @@ void UDisplayOptionPanel::OnWindowModeComboBoxSelectionChanged(int SelectedIndex
 
 void UDisplayOptionPanel::OnResolutionComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType)
 {
-	UserSettingsProfile->Resolution = Selection;
+	CurrentSettingsProfile->Resolution = Selection;
 }
 
 void UDisplayOptionPanel::OnVSyncCheckBoxSelectionChanged(bool Selection)
 {
-	UserSettingsProfile->VSyncEnabled = Selection;
+	CurrentSettingsProfile->VSyncEnabled = Selection;
 }
 
 void UDisplayOptionPanel::OnBrightnessSliderValueChanged(float Value)
 {
-	UserSettingsProfile->Brightness = Value;
+	CurrentSettingsProfile->Brightness = Value;
 }
 
 void UDisplayOptionPanel::OnGammaSliderValueChanged(float Value)
 {
-	UserSettingsProfile->Gamma = Value;
+	CurrentSettingsProfile->Gamma = Value;
 }
 
 void UDisplayOptionPanel::OnDisplayApplyButtonClicked()
 {
-	UserSettingsProfile->Print();
+	CurrentSettingsProfile->Print();
 }
 
 void UDisplayOptionPanel::OnDisplayResetButtonClicked()
 {
-	UserSettingsProfile->WindowMode = EWindowMode::Windowed;
-	UserSettingsProfile->Resolution = "1280x720";
-	UserSettingsProfile->VSyncEnabled = true;
-	UserSettingsProfile->Brightness = 0.5f;
-	UserSettingsProfile->Gamma = 0.5f;
-	RealizeDisplayOptions(UserSettingsProfile);
+	CurrentSettingsProfile->WindowMode = EWindowMode::Windowed;
+	CurrentSettingsProfile->Resolution = "1280x720";
+	CurrentSettingsProfile->VSyncEnabled = true;
+	CurrentSettingsProfile->Brightness = 0.5f;
+	CurrentSettingsProfile->Gamma = 0.5f;
+	RealizeDisplayOptions(CurrentSettingsProfile);
 }
 
 void UDisplayOptionPanel::RealizeDisplayOptions(UUserSettingsProfile* UserSettingsProfile)
