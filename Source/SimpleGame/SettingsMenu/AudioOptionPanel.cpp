@@ -9,32 +9,38 @@
 void UAudioOptionPanel::OnMasterSliderValueChanged(float Value)
 {
 	CurrentSettingsProfile->MasterVolume = Value;
+	RealizeAudioOptions(CurrentSettingsProfile);
 }
 
 void UAudioOptionPanel::OnSFXSliderValueChanged(float Value)
 {
 	CurrentSettingsProfile->SFXVolume = Value;
+	RealizeAudioOptions(CurrentSettingsProfile);
 }
 
 void UAudioOptionPanel::OnAmbianceSliderValueChanged(float Value)
 {
 	CurrentSettingsProfile->AmbianceVolume = Value;
+	RealizeAudioOptions(CurrentSettingsProfile);
 }
 
 void UAudioOptionPanel::OnMusicSliderValueChanged(float Value)
 {
 	CurrentSettingsProfile->MusicVolume = Value;
+	RealizeAudioOptions(CurrentSettingsProfile);
 }
 
 void UAudioOptionPanel::OnVoiceSliderValueChanged(float Value)
 {
 	CurrentSettingsProfile->VoiceVolume = Value;
+	RealizeAudioOptions(CurrentSettingsProfile);
 }
 
 void UAudioOptionPanel::OnAudioApplyButtonClicked()
 {
 	SavedSettingsProfile->SetFromOther(CurrentSettingsProfile);
 	UGameplayStatics::SaveGameToSlot(SavedSettingsProfile, "SettingsProfile", 0);
+	RealizeAudioOptions(CurrentSettingsProfile);
 }
 
 void UAudioOptionPanel::OnAudioResetButtonClicked(){

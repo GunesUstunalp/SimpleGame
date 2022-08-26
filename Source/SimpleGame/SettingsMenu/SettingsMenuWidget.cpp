@@ -150,7 +150,7 @@ void USettingsMenuWidget::NativeConstruct()
 	{
 		SavedSettingsProfile = Cast<UUserSettingsProfile>(UGameplayStatics::LoadGameFromSlot("SettingsProfile", 0));
 		CurrentSettingsProfile = Cast<UUserSettingsProfile>(UGameplayStatics::LoadGameFromSlot("SettingsProfile", 0));
-		SavedSettingsProfile->Print();
+		//SavedSettingsProfile->Print();
 		UE_LOG(LogTemp, Warning, TEXT("SavedSettingsProfile is found"));
 	}
 	else

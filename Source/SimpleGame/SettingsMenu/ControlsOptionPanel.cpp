@@ -8,6 +8,7 @@
 void UControlsOptionPanel::OnMouseSensitivitySliderValueChanged(float Value)
 {
 	CurrentSettingsProfile->MouseSensitivity = Value;
+	RealizeControlsOptions(CurrentSettingsProfile);
 }
 
 void UControlsOptionPanel::OnControlsApplyButtonClicked()
@@ -15,6 +16,7 @@ void UControlsOptionPanel::OnControlsApplyButtonClicked()
 	CurrentSettingsProfile->Print();
 	SavedSettingsProfile->SetFromOther(CurrentSettingsProfile);
 	UGameplayStatics::SaveGameToSlot(SavedSettingsProfile, "SettingsProfile", 0);
+	RealizeControlsOptions(CurrentSettingsProfile);
 }
 
 void UControlsOptionPanel::OnControlsResetButtonClicked()

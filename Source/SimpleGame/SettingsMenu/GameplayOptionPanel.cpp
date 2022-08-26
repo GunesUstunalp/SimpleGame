@@ -8,26 +8,31 @@
 void UGameplayOptionPanel::OnLanguageComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType)
 {
 	CurrentSettingsProfile->Language = Selection;
+	RealizeGameplayOptions(CurrentSettingsProfile);
 }
 
 void UGameplayOptionPanel::OnSubtitlesCheckBoxSelectionChanged(bool Selection)
 {
 	CurrentSettingsProfile->IsSubtitleEnabled = Selection;
+	RealizeGameplayOptions(CurrentSettingsProfile);
 }
 
 void UGameplayOptionPanel::OnBloodCheckBoxSelectionChanged(bool Selection)
 {
 	CurrentSettingsProfile->IsBloodEnabled = Selection;
+	RealizeGameplayOptions(CurrentSettingsProfile);
 }
 
 void UGameplayOptionPanel::OnGoreCheckBoxSelectionChanged(bool Selection)
 {
 	CurrentSettingsProfile->IsGoreEnabled = Selection;
+	RealizeGameplayOptions(CurrentSettingsProfile);
 }
 
 void UGameplayOptionPanel::OnInsectsCheckBoxSelectionChanged(bool Selection)
 {
 	CurrentSettingsProfile->IsInsectsEnabled = Selection;
+	RealizeGameplayOptions(CurrentSettingsProfile);
 }
 
 void UGameplayOptionPanel::OnGameplayApplyButtonClicked()
@@ -35,6 +40,7 @@ void UGameplayOptionPanel::OnGameplayApplyButtonClicked()
 	CurrentSettingsProfile->Print();
 	SavedSettingsProfile->SetFromOther(CurrentSettingsProfile);
 	UGameplayStatics::SaveGameToSlot(SavedSettingsProfile, "SettingsProfile", 0);
+	RealizeGameplayOptions(CurrentSettingsProfile);
 }
 
 void UGameplayOptionPanel::OnGameplayResetButtonClicked()

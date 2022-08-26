@@ -21,26 +21,31 @@ void UDisplayOptionPanel::OnWindowModeComboBoxSelectionChanged(int SelectedIndex
 	default:
 		UE_LOG(LogTemp, Error, TEXT("ERROR! Unknown WindowMode!!!"));
 	}
+	RealizeDisplayOptions(CurrentSettingsProfile);
 }
 
 void UDisplayOptionPanel::OnResolutionComboBoxSelectionChanged(FString Selection, ESelectInfo::Type SelectionType)
 {
 	CurrentSettingsProfile->Resolution = Selection;
+	RealizeDisplayOptions(CurrentSettingsProfile);
 }
 
 void UDisplayOptionPanel::OnVSyncCheckBoxSelectionChanged(bool Selection)
 {
 	CurrentSettingsProfile->VSyncEnabled = Selection;
+	RealizeDisplayOptions(CurrentSettingsProfile);
 }
 
 void UDisplayOptionPanel::OnBrightnessSliderValueChanged(float Value)
 {
 	CurrentSettingsProfile->Brightness = Value;
+	RealizeDisplayOptions(CurrentSettingsProfile);
 }
 
 void UDisplayOptionPanel::OnGammaSliderValueChanged(float Value)
 {
 	CurrentSettingsProfile->Gamma = Value;
+	RealizeDisplayOptions(CurrentSettingsProfile);
 }
 
 void UDisplayOptionPanel::OnDisplayApplyButtonClicked()
@@ -48,6 +53,7 @@ void UDisplayOptionPanel::OnDisplayApplyButtonClicked()
 	CurrentSettingsProfile->Print();
 	SavedSettingsProfile->SetFromOther(CurrentSettingsProfile);
 	UGameplayStatics::SaveGameToSlot(SavedSettingsProfile, "SettingsProfile", 0);
+	RealizeDisplayOptions(CurrentSettingsProfile);
 }
 
 void UDisplayOptionPanel::OnDisplayResetButtonClicked()
